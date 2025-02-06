@@ -7,13 +7,52 @@
     android:background="#000"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/top_card"
+        android:layout_width="0dp"
+        android:layout_height="145dp"
+        android:layout_margin="24dp"
+        android:contentDescription="@string/back_top_main"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_top_main" />
+
+    <TextView
+        android:id="@+id/txt_currentDatePersian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/sans_fa_name_bold"
+        android:gravity="center"
+        android:maxWidth="185dp"
+        android:maxLines="1"
+        android:textColor="@color/back_view_black"
+        android:textDirection="rtl"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/top_card"
+        app:layout_constraintEnd_toEndOf="@+id/top_card"
+        app:layout_constraintStart_toStartOf="@+id/top_card"
+        app:layout_constraintTop_toTopOf="@+id/top_card"
+        tools:text="سه شنبه 22 شهریور" />
+
+    <TextView
+        android:id="@+id/txt_currentDateEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxWidth="185dp"
+        android:maxLines="1"
+        android:textColor="@color/white_text"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/top_card"
+        app:layout_constraintEnd_toEndOf="@+id/top_card"
+        app:layout_constraintStart_toStartOf="@+id/top_card"
+        app:layout_constraintTop_toTopOf="@+id/top_card"
+        tools:text="07 October 2025" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

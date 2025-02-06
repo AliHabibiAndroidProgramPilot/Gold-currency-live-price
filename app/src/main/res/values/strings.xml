@@ -3,4 +3,5 @@
     <string name="splash_logo">Splash_logo</string>
     <string name="SplashMainText">قیمت طلا و ارز</string>
     <string name="SplashDescriptionText">تازه ترین اخبار ارز و طلای جهان</string>
+    <string name="back_top_main">back top main</string>
 </resources>
