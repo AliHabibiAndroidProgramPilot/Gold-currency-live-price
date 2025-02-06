@@ -1,11 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.قیمتطلاوارز" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Customize your light theme here. -->
+    <style name="Base.Theme.قیمتطلاوارز" parent="Theme.Material3.Light.NoActionBar" />
+
+    <style name="Theme.قیمتطلاوارز." parent="Base.Theme.قیمتطلاوارز">
 
     </style>
-
-    <style name="Theme.قیمتطلاوارز." parent="Base.Theme.قیمتطلاوارز" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black</item>
