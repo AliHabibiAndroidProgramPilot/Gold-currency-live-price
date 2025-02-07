@@ -4,4 +4,6 @@
     <string name="SplashMainText">قیمت طلا و ارز</string>
     <string name="SplashDescriptionText">تازه ترین اخبار ارز و طلای جهان</string>
     <string name="back_top_main">back top main</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

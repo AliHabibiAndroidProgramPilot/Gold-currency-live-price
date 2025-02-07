@@ -10,10 +10,10 @@
     <ImageView
         android:id="@+id/top_card"
         android:layout_width="0dp"
-        android:layout_height="145dp"
+        android:layout_height="120dp"
         android:layout_margin="24dp"
         android:contentDescription="@string/back_top_main"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,5 +54,36 @@
         app:layout_constraintStart_toStartOf="@+id/top_card"
         app:layout_constraintTop_toTopOf="@+id/top_card"
         tools:text="07 October 2025" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        style="@style/Theme.App.TabLayout"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/tab_layout_bg"
+        app:layout_constraintEnd_toEndOf="@id/top_card"
+        app:layout_constraintStart_toStartOf="@id/top_card"
+        app:layout_constraintTop_toBottomOf="@id/top_card" />
+
+    <View
+        android:layout_width="0.8dp"
+        android:layout_height="28dp"
+        android:background="@color/white_text"
+        app:layout_constraintBottom_toBottomOf="@id/tabLayout"
+        app:layout_constraintEnd_toEndOf="@id/tabLayout"
+        app:layout_constraintStart_toStartOf="@+id/tabLayout"
+        app:layout_constraintTop_toTopOf="@+id/tabLayout" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/tabLayout_viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layoutDirection="rtl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tabLayout"
+        app:layout_constraintStart_toStartOf="@+id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

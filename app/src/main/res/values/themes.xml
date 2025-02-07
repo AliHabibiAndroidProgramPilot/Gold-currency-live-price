@@ -12,4 +12,22 @@
         <item name="postSplashScreenTheme">@style/Theme.قیمتطلاوارز.</item>
     </style>
 
+    <style name="TabTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/sans_fa_name_bold</item>
+        <item name="android:textDirection">rtl</item>
+    </style>
+
+    <style name="Theme.App.TabLayout" parent="Theme.قیمتطلاوارز.">
+        <item name="tabSelectedTextColor">@color/gold_text</item>
+        <item name="tabTextAppearance">@style/TabTextStyle</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="tabRippleColor">@color/splash_gold_low_opacity</item>
+        <item name="tabIndicatorHeight">0dp</item>
+    </style>
+
 </resources>

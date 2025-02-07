@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="splash_gold">#D5A06D</color>
+    <color name="splash_gold_low_opacity">#33D9AE86</color>
     <color name="white_text">#787879</color>
     <color name="back_view_black">#141414</color>
     <color name="gold_text">#E7C376</color>
