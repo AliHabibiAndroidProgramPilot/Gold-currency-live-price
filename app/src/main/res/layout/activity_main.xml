@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
+    android:layoutDirection="ltr"
     tools:context=".MainActivity">
 
     <ImageView
@@ -62,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/tab_layout_bg"
+        android:background="@drawable/main_bg"
         app:layout_constraintEnd_toEndOf="@id/top_card"
         app:layout_constraintStart_toStartOf="@id/top_card"
         app:layout_constraintTop_toBottomOf="@id/top_card"
