@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.قیمتطلاوارز" parent="Theme.Material3.Light.NoActionBar" />
 
@@ -22,7 +22,7 @@
     <style name="Theme.App.TabLayout" parent="Theme.قیمتطلاوارز.">
         <item name="tabSelectedTextColor">@color/gold_text</item>
         <item name="tabTextAppearance">@style/TabTextStyle</item>
-        <item name="tabTextColor">@color/white</item>
+        <item name="tabTextColor">@color/tab_text</item>
         <item name="tabMode">fixed</item>
         <item name="tabGravity">fill</item>
         <item name="android:layoutDirection">rtl</item>
