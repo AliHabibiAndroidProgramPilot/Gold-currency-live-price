@@ -56,7 +56,7 @@
         android:fontFamily="@font/sans_fa_name_regular"
         android:gravity="start"
         android:maxLines="1"
-        android:textColor="@color/white"
+        android:textColor="@color/gold_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/content_title"
         app:layout_constraintStart_toStartOf="parent"

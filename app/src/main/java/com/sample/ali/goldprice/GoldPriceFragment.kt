@@ -9,9 +9,6 @@ import com.sample.ali.goldprice.databinding.FragmentCurrencyPriceBinding
 
 class GoldPriceFragment : Fragment() {
     private lateinit var binding: FragmentCurrencyPriceBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,5 +17,10 @@ class GoldPriceFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCurrencyPriceBinding.inflate(inflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 }
