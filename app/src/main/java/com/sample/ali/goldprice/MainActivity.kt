@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadActivity(): Boolean {
-        // region Set Time Text
         val apiRepositoryInstance = ApiRepository.instance
+        // region Set Time Text
         apiRepositoryInstance.getTime(
             object : TimeApiRespond {
                 override fun onApiRespond(respond: TimeModel) {

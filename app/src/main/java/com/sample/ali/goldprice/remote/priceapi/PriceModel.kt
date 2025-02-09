@@ -6,23 +6,17 @@ data class PriceModel(
 
 data class Data(
     val cryptocurrencies: List<Cryptocurrency>,
-    val currencies: List<Currency>,
-    val golds: List<Gold>
+    val currencies: List<GoldAndCurrencyContent>,
+    val golds: List<GoldAndCurrencyContent>
 )
 
 data class Cryptocurrency(
-    val label: String,
-    val name: String,
+    val label: String, // بیت کوین
+    val name: String, // BitCoin
     val price: Int
 )
 
-data class Currency(
-    val name: String,
+data class GoldAndCurrencyContent(
+    val label: String, // طلای 18 عیار | دلار
     val price: Int,
-    val symbol: String
-)
-
-data class Gold(
-    val label: String,
-    val price: Int
 )
