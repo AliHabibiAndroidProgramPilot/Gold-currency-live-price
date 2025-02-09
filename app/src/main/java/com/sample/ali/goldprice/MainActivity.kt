@@ -10,9 +10,9 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
-import com.sample.ali.goldprice.timeapi.TimeApiRepository
-import com.sample.ali.goldprice.timeapi.TimeApiRespond
-import com.sample.ali.goldprice.timeapi.TimeModel
+import com.sample.ali.goldprice.remote.ApiRepository
+import com.sample.ali.goldprice.remote.timeapi.TimeApiRespond
+import com.sample.ali.goldprice.remote.timeapi.TimeModel
 import java.util.StringJoiner
 
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadActivity(): Boolean {
         // region Set Time Text
-        TimeApiRepository.instance.getTime(
+        ApiRepository.instance.getTime(
             object : TimeApiRespond {
                 override fun onApiRespond(respond: TimeModel) {
                     binding.txtCurrentDatePersian.text = StringJoiner(" ")

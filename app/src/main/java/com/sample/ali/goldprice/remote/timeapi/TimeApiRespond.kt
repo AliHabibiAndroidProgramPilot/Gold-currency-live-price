@@ -1,4 +1,4 @@
-package com.sample.ali.goldprice.timeapi
+package com.sample.ali.goldprice.remote.timeapi
 
 interface TimeApiRespond {
     fun onApiRespond(respond: TimeModel)

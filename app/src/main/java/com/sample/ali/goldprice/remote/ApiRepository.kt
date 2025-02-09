@@ -1,24 +1,26 @@
-package com.sample.ali.goldprice.timeapi
+package com.sample.ali.goldprice.remote
 
 import android.util.Log
+import com.sample.ali.goldprice.remote.timeapi.TimeApiRespond
+import com.sample.ali.goldprice.remote.timeapi.TimeModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TimeApiRepository private constructor() {
+class ApiRepository private constructor() {
 
     companion object {
-        private var timeApiRepository: TimeApiRepository? = null
-        val instance: TimeApiRepository
+        private var apiRepository: ApiRepository? = null
+        val instance: ApiRepository
             get() {
-                if (timeApiRepository == null)
-                    timeApiRepository = TimeApiRepository()
-                return timeApiRepository!!
+                if (apiRepository == null)
+                    apiRepository = ApiRepository()
+                return apiRepository!!
             }
     }
 
     fun getTime(apiRespond: TimeApiRespond) {
-        TimeRetrofitService.apiService.getTime(true).enqueue(
+        ApiRetrofitService.apiService.getTime(true).enqueue(
             object : Callback<TimeModel> {
                 override fun onResponse(call: Call<TimeModel>, response: Response<TimeModel>) {
                     if (response.isSuccessful)
@@ -30,7 +32,7 @@ class TimeApiRepository private constructor() {
                 }
 
                 override fun onFailure(call: Call<TimeModel>, t: Throwable) {
-                    val toastMessage = "اتصال اینترنت خود را بررسی کنید"
+                    val toastMessage = "خطا در دریافت اطلاعات اتصال اینترنت خود را بررسی کنید"
                     apiRespond.onApiRespondFailure(toastMessage)
                     Log.e("API", "${t.cause} \n ${t.message}")
                 }

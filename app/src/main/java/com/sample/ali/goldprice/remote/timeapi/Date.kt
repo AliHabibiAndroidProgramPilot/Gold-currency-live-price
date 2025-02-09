@@ -1,4 +1,4 @@
-package com.sample.ali.goldprice.timeapi
+package com.sample.ali.goldprice.remote.timeapi
 
 import com.google.gson.annotations.SerializedName
 

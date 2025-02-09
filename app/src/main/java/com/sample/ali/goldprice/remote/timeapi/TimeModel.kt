@@ -1,4 +1,4 @@
-package com.sample.ali.goldprice.timeapi
+package com.sample.ali.goldprice.remote.timeapi
 
 data class TimeModel(
     val success: Int,

@@ -1,9 +1,9 @@
-package com.sample.ali.goldprice.timeapi
+package com.sample.ali.goldprice.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object TimeRetrofitService {
+object ApiRetrofitService {
 
     private const val BASE_URL = "https://tools.daneshjooyar.com/api/v1/"
     private val converterFactory = GsonConverterFactory.create()
@@ -11,6 +11,6 @@ object TimeRetrofitService {
         .baseUrl(BASE_URL)
         .addConverterFactory(converterFactory)
         .build()
-    val apiService: TimeApiService = retrofit.create(TimeApiService::class.java)
+    val apiService: ApiService = retrofit.create(ApiService::class.java)
 
 }
