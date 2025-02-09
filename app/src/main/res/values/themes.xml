@@ -26,7 +26,7 @@
         <item name="tabMode">fixed</item>
         <item name="tabGravity">fill</item>
         <item name="android:layoutDirection">rtl</item>
-        <item name="tabRippleColor">@color/splash_gold_low_opacity</item>
+        <item name="tabRippleColor">@android:color/transparent</item>
         <item name="tabIndicatorHeight">0dp</item>
     </style>
 
