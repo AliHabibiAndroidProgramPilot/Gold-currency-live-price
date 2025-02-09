@@ -1,8 +1,28 @@
 package com.sample.ali.goldprice.remote.priceapi
 
-import com.google.gson.annotations.SerializedName
-
 data class PriceModel(
-    val `data`: Data,
-    @SerializedName("last_update") val lastUpdate: String,
+    val data: Data
+)
+
+data class Data(
+    val cryptocurrencies: List<Cryptocurrency>,
+    val currencies: List<Currency>,
+    val golds: List<Gold>
+)
+
+data class Cryptocurrency(
+    val label: String,
+    val name: String,
+    val price: Int
+)
+
+data class Currency(
+    val name: String,
+    val price: Int,
+    val symbol: String
+)
+
+data class Gold(
+    val label: String,
+    val price: Int
 )

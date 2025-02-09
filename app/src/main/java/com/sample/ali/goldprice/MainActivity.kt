@@ -1,6 +1,7 @@
 package com.sample.ali.goldprice
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +10,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.tabs.TabLayoutMediator
+import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
 import com.sample.ali.goldprice.remote.ApiRepository
+import com.sample.ali.goldprice.remote.priceapi.PriceApiRespond
+import com.sample.ali.goldprice.remote.priceapi.PriceModel
 import com.sample.ali.goldprice.remote.timeapi.TimeApiRespond
 import com.sample.ali.goldprice.remote.timeapi.TimeModel
 import java.util.StringJoiner
@@ -38,7 +42,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadActivity(): Boolean {
         // region Set Time Text
-        ApiRepository.instance.getTime(
+        val apiRepositoryInstance = ApiRepository.instance
+        apiRepositoryInstance.getTime(
             object : TimeApiRespond {
                 override fun onApiRespond(respond: TimeModel) {
                     binding.txtCurrentDatePersian.text = StringJoiner(" ")
@@ -52,6 +57,19 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
                 }
 
+            }
+        )
+        // endregion
+        // region Set Prices
+        apiRepositoryInstance.getPrices(
+            object : PriceApiRespond {
+                override fun onApiRespond(respond: PriceModel) {
+
+                }
+
+                override fun onApiRespondFailure(message: String) {
+                    Log.i("API", message)
+                }
             }
         )
         // endregion
