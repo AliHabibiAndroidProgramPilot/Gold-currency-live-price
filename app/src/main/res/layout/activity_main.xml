@@ -30,7 +30,7 @@
         android:gravity="center"
         android:maxWidth="185dp"
         android:maxLines="1"
-        android:textColor="@color/back_view_black"
+        android:textColor="@color/black"
         android:textDirection="rtl"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/top_card"
@@ -39,23 +39,20 @@
         app:layout_constraintTop_toTopOf="@+id/top_card"
         tools:text="سه شنبه 22 شهریور" />
 
-    <TextView
-        android:id="@+id/txt_currentDateEnglish"
+    <TextClock
+        android:id="@+id/txt_clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:ellipsize="end"
+        android:fontFamily="@font/sans_fa_name_bold"
         android:gravity="center"
-        android:maxWidth="185dp"
-        android:maxLines="1"
-        android:textColor="@color/white_text"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:format24Hour="HH : mm"
         app:layout_constraintBottom_toBottomOf="@+id/top_card"
         app:layout_constraintEnd_toEndOf="@+id/top_card"
         app:layout_constraintStart_toStartOf="@+id/top_card"
-        app:layout_constraintTop_toTopOf="@+id/top_card"
-        tools:ignore="TextContrastCheck"
-        tools:text="07 October 2025" />
+        app:layout_constraintTop_toTopOf="@+id/top_card" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

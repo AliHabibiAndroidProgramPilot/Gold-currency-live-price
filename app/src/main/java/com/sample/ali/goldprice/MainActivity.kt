@@ -20,15 +20,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val insetsController = WindowCompat.getInsetsController(window, window.decorView)
-        insetsController.isAppearanceLightNavigationBars = false
-        insetsController.isAppearanceLightStatusBars = false
         var isActivityReady = false
         installSplashScreen().setKeepOnScreenCondition { !isActivityReady }
         enableEdgeToEdge()
+        val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+        insetsController.isAppearanceLightNavigationBars = false
+        insetsController.isAppearanceLightStatusBars = false
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         isActivityReady = loadActivity()
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,21 +38,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadActivity(): Boolean {
         // region Set Time Text
-        val timeApiRespond = object : TimeApiRespond {
-            override fun onApiRespond(respond: TimeModel) {
-                binding.txtCurrentDatePersian.text = StringJoiner(" ")
-                    .add(respond.date.dayOfMonthDigits)
-                    .add(respond.date.monthFullName)
-                    .add(respond.date.yearFourDigit)
-                    .toString()
-            }
+        TimeApiRepository.instance.getTime(
+            object : TimeApiRespond {
+                override fun onApiRespond(respond: TimeModel) {
+                    binding.txtCurrentDatePersian.text = StringJoiner(" ")
+                        .add(respond.date.dayOfMonthDigits)
+                        .add(respond.date.monthFullName)
+                        .add(respond.date.yearFourDigit)
+                        .toString()
+                }
 
-            override fun onApiRespondFailure(message: String) {
-                Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
-            }
+                override fun onApiRespondFailure(message: String) {
+                    Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+                }
 
-        }
-        TimeApiRepository.instance.getTime(timeApiRespond)
+            }
+        )
         // endregion
         // region Build Up Tab Layout
         binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
