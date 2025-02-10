@@ -2,12 +2,13 @@ package com.sample.ali.goldprice.remote.priceapi
 
 data class PriceModel(
     val data: Data
+//  val message: String "به روزرسانی شده در تاریخ فلان"
 )
 
 data class Data(
-    val cryptocurrencies: List<Cryptocurrency>,
-    val currencies: List<GoldAndCurrencyContent>,
-    val golds: List<GoldAndCurrencyContent>
+    val cryptocurrencies: ArrayList<Cryptocurrency>,
+    val currencies: ArrayList<GoldAndCurrencyContent>,
+    val golds: ArrayList<GoldAndCurrencyContent>
 )
 
 data class Cryptocurrency(

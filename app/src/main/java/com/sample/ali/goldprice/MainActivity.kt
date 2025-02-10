@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
 import com.sample.ali.goldprice.remote.ApiRepository
+import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
 import com.sample.ali.goldprice.remote.priceapi.PriceApiRespond
 import com.sample.ali.goldprice.remote.priceapi.PriceModel
 import com.sample.ali.goldprice.remote.timeapi.TimeApiRespond
@@ -22,6 +23,7 @@ import java.util.StringJoiner
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val currenciesPrice = ArrayList<GoldAndCurrencyContent>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var isActivityReady = false
@@ -57,19 +59,6 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
                 }
 
-            }
-        )
-        // endregion
-        // region Set Prices
-        apiRepositoryInstance.getPrices(
-            object : PriceApiRespond {
-                override fun onApiRespond(respond: PriceModel) {
-
-                }
-
-                override fun onApiRespondFailure(message: String) {
-                    Log.i("API", message)
-                }
             }
         )
         // endregion

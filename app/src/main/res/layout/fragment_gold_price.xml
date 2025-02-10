@@ -9,9 +9,10 @@
     tools:context=".GoldPriceFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_goldPrice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        tools:listitem="@layout/gold_recycler_item" />
+        tools:listitem="@layout/recycler_item" />
 
 </FrameLayout>

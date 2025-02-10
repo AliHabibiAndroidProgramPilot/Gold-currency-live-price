@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TimeModel(
     val date: TimeModelDate
+//    val message: String "به روزرسانی شده در تاریخ فلان"
 )
 
 data class TimeModelDate(
