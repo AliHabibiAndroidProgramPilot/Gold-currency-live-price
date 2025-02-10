@@ -1,7 +1,6 @@
 package com.sample.ali.goldprice
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,9 +12,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
 import com.sample.ali.goldprice.remote.ApiRepository
-import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
-import com.sample.ali.goldprice.remote.priceapi.PriceApiRespond
-import com.sample.ali.goldprice.remote.priceapi.PriceModel
 import com.sample.ali.goldprice.remote.timeapi.TimeApiRespond
 import com.sample.ali.goldprice.remote.timeapi.TimeModel
 import java.util.StringJoiner
@@ -23,7 +19,6 @@ import java.util.StringJoiner
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val currenciesPrice = ArrayList<GoldAndCurrencyContent>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var isActivityReady = false
