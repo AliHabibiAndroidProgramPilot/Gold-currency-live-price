@@ -1,5 +1,6 @@
 package com.sample.ali.goldprice.adapters
 
+import android.icu.text.DecimalFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +14,9 @@ class MainRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyConten
     inner class ViewHolder(private val binding: RecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setRecyclerData(data: GoldAndCurrencyContent) {
+            val price = data.price / 10
             binding.contentTitle.text = data.label
-            binding.contentPrice.text = (data.price / 10).toString()
+            binding.contentPrice.text = DecimalFormat("#,###").format(price)
         }
     }
 
