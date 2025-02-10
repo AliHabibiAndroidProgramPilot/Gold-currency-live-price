@@ -30,6 +30,7 @@ class GoldPriceFragment : Fragment() {
                         recyclerView.layoutManager =
                             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                         recyclerView.adapter = GoldRecyclerViewAdapter(goldsPrice)
+                        binding.progress.visibility = View.GONE
                     }
                 }
 

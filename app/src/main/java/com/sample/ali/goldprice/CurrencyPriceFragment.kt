@@ -29,6 +29,7 @@ class CurrencyPriceFragment : Fragment() {
                         recyclerView.layoutManager =
                             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                         recyclerView.adapter = CurrencyRecyclerViewAdapter(currenciesPrice)
+                        binding.progress.visibility = View.GONE
                     }
                 }
 
