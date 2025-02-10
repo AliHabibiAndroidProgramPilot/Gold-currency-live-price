@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.sample.ali.goldprice.R
 import com.sample.ali.goldprice.databinding.RecyclerItemGoldBinding
 import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
 
@@ -13,10 +14,25 @@ class GoldRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyConten
 
     inner class ViewHolder(private val binding: RecyclerItemGoldBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun setRecyclerData(data: GoldAndCurrencyContent) {
+        private val icons = arrayOf(
+            R.drawable.ic_18,
+            R.drawable.ic_24,
+            R.drawable.full_coin_ic,
+            R.drawable.half_coin_ic,
+            R.drawable.quarter_coin_ic
+        )
+
+        fun setRecyclerData(data: GoldAndCurrencyContent, position: Int) {
             val price = data.price / 10
             binding.contentTitle.text = data.label
             binding.contentPrice.text = DecimalFormat("#,###").format(price)
+            when (position) {
+                0 -> binding.contentIcon.setImageResource(icons[position])
+                1 -> binding.contentIcon.setImageResource(icons[position])
+                2 -> binding.contentIcon.setImageResource(icons[position])
+                3 -> binding.contentIcon.setImageResource(icons[position])
+                4 -> binding.contentIcon.setImageResource(icons[position])
+            }
         }
     }
 
@@ -28,7 +44,7 @@ class GoldRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyConten
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setRecyclerData(items[position])
+        holder.setRecyclerData(items[position], position)
     }
 
 }
