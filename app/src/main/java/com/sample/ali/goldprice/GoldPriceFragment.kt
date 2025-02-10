@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.ali.goldprice.adapters.MainRecyclerViewAdapter
+import com.sample.ali.goldprice.adapters.GoldRecyclerViewAdapter
 import com.sample.ali.goldprice.databinding.FragmentGoldPriceBinding
 import com.sample.ali.goldprice.remote.ApiRepository
 import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
@@ -29,7 +29,7 @@ class GoldPriceFragment : Fragment() {
                         val recyclerView = binding.recyclerGoldPrice
                         recyclerView.layoutManager =
                             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                        recyclerView.adapter = MainRecyclerViewAdapter(goldsPrice)
+                        recyclerView.adapter = GoldRecyclerViewAdapter(goldsPrice)
                     }
                 }
 

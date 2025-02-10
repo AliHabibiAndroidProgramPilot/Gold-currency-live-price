@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.sample.ali.goldprice.databinding.RecyclerItemBinding
+import com.sample.ali.goldprice.databinding.RecyclerItemGoldBinding
 import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
 
-class MainRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyContent>) :
-    Adapter<MainRecyclerViewAdapter.ViewHolder>() {
+class GoldRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyContent>) :
+    Adapter<GoldRecyclerViewAdapter.ViewHolder>() {
 
-    inner class ViewHolder(private val binding: RecyclerItemBinding) :
+    inner class ViewHolder(private val binding: RecyclerItemGoldBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setRecyclerData(data: GoldAndCurrencyContent) {
             val price = data.price / 10
@@ -21,7 +21,7 @@ class MainRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyConten
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RecyclerItemBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = RecyclerItemGoldBinding.inflate(LayoutInflater.from(parent.context))
         return ViewHolder(binding)
     }
 
