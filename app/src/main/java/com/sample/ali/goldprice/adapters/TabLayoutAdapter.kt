@@ -11,6 +11,7 @@ class TabLayoutAdapter(
     supportFragmentManager: FragmentManager,
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(supportFragmentManager, lifecycle) {
+
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment = when (position) {

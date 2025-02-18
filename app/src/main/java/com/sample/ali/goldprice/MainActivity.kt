@@ -1,7 +1,9 @@
 package com.sample.ali.goldprice
 
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -19,17 +21,17 @@ import java.util.StringJoiner
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val tabLayoutItems: Array<String> = arrayOf("قیمت طلا", "قیمت ارز")
+    private val tabLayoutItems = arrayListOf("قیمت طلا", "قیمت ارز")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var isActivityReady = false
-        installSplashScreen().setKeepOnScreenCondition { !isActivityReady }
+        var hasNetworkCapabilities = false
+        installSplashScreen().setKeepOnScreenCondition{ !hasNetworkCapabilities }
         enableEdgeToEdge()
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         insetsController.isAppearanceLightNavigationBars = false
         insetsController.isAppearanceLightStatusBars = false
+        hasNetworkCapabilities = checkConnectivityManager()
         binding = ActivityMainBinding.inflate(layoutInflater)
-        isActivityReady = loadActivity()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -42,26 +44,31 @@ class MainActivity : AppCompatActivity() {
         }.attach()
     }
 
-    private fun loadActivity(): Boolean {
-        val apiRepositoryInstance = ApiRepository.instance
-        // region Set Time Text
-        apiRepositoryInstance.getTime(
-            object : TimeApiRespond {
-                override fun onApiRespond(respond: TimeModel) {
-                    binding.txtCurrentDatePersian.text = StringJoiner(" ")
-                        .add(respond.date.dayOfMonthDigits)
-                        .add(respond.date.monthFullName)
-                        .add(respond.date.yearFourDigit)
-                        .toString()
-                }
+    private fun checkConnectivityManager(): Boolean {
+        val connectivityManager =
+            getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        if (capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true) {
+            val apiRepositoryInstance = ApiRepository.instance
+            apiRepositoryInstance.getTime(
+                object : TimeApiRespond {
+                    override fun onApiRespond(respond: TimeModel) {
+                        binding.txtCurrentDatePersian.text = StringJoiner(" ")
+                            .add(respond.date.dayOfMonthDigits)
+                            .add(respond.date.monthFullName)
+                            .add(respond.date.yearFourDigit)
+                            .toString()
+                    }
 
-                override fun onApiRespondFailure(message: String) {
-                    Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
-                }
+                    override fun onApiRespondFailure(message: String) {
+                        Log.e("API", message)
+                    }
 
-            }
-        )
-        // endregion
-        return true
+                }
+            )
+            return true
+        } else
+            return false
     }
 }
