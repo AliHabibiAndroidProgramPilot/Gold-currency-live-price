@@ -19,6 +19,7 @@ import java.util.StringJoiner
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val tabLayoutItems: Array<String> = arrayOf("قیمت طلا", "قیمت ارز")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var isActivityReady = false
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
+            tab.text = tabLayoutItems[position]
+        }.attach()
     }
 
     private fun loadActivity(): Boolean {
@@ -56,13 +61,6 @@ class MainActivity : AppCompatActivity() {
 
             }
         )
-        // endregion
-        // region Build Up Tab Layout
-        binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
-        val tabLayoutTitles = arrayListOf("قیمت طلا", "قیمت ارز")
-        TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
-            tab.text = tabLayoutTitles[position]
-        }.attach()
         // endregion
         return true
     }
