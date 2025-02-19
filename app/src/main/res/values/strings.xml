@@ -7,4 +7,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="gold_icons">gold_icons</string>
     <string name="currency_icon">currency icon</string>
+    <string name="internet_problem">
+        خطا در دریافت اطلاعات
+        اتصال اینترنت خود را بررسی کنید
+    </string>
+    <string name="try_again">تلاش دوباره</string>
 </resources>

@@ -4,6 +4,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -29,21 +30,26 @@ class MainActivity : AppCompatActivity() {
     private var isNotShowingSplashScreen = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen().setKeepOnScreenCondition{ !isNotShowingSplashScreen }
+        installSplashScreen().setKeepOnScreenCondition { !isNotShowingSplashScreen }
         enableEdgeToEdge()
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         insetsController.isAppearanceLightNavigationBars = false
         insetsController.isAppearanceLightStatusBars = false
         hasNetworkCapabilities = checkConnectivityManager()
-        if (hasNetworkCapabilities)
-            isNotShowingSplashScreen = true
-        else
-            lifecycleScope.launch {
-                delay(10000)
-                isNotShowingSplashScreen = true
-            }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (hasNetworkCapabilities)
+            isNotShowingSplashScreen = true
+        else {
+            lifecycleScope.launch {
+                delay(4500)
+                isNotShowingSplashScreen = true
+            }
+            binding.fragmentContainer.visibility = View.VISIBLE
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, InternetUnavailableFragment())
+                .commit()
+        }
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
