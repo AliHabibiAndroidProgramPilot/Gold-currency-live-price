@@ -49,6 +49,8 @@ dependencies {
     implementation libs.converter.gson
     // Retrofit2
     implementation libs.retrofit
+    // Swipe To Refresh
+    implementation libs.androidx.swiperefreshlayout
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
