@@ -10,27 +10,38 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
 import com.sample.ali.goldprice.remote.ApiRepository
 import com.sample.ali.goldprice.remote.timeapi.TimeApiRespond
 import com.sample.ali.goldprice.remote.timeapi.TimeModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.StringJoiner
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val tabLayoutItems = arrayListOf("قیمت طلا", "قیمت ارز")
+    private var hasNetworkCapabilities = false
+    private var isNotShowingSplashScreen = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var hasNetworkCapabilities = false
-        installSplashScreen().setKeepOnScreenCondition{ !hasNetworkCapabilities }
+        installSplashScreen().setKeepOnScreenCondition{ !isNotShowingSplashScreen }
         enableEdgeToEdge()
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         insetsController.isAppearanceLightNavigationBars = false
         insetsController.isAppearanceLightStatusBars = false
         hasNetworkCapabilities = checkConnectivityManager()
+        if (hasNetworkCapabilities)
+            isNotShowingSplashScreen = true
+        else
+            lifecycleScope.launch {
+                delay(10000)
+                isNotShowingSplashScreen = true
+            }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
