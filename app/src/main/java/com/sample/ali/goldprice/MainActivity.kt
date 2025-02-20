@@ -11,6 +11,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private val tabLayoutItems = arrayListOf("قیمت طلا", "قیمت ارز")
     private var hasNetworkCapabilities = false
     private var isNotShowingSplashScreen = false
+    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().setKeepOnScreenCondition { !isNotShowingSplashScreen }
@@ -61,14 +65,44 @@ class MainActivity : AppCompatActivity() {
         }.attach()
     }
 
+    override fun onStart() {
+        super.onStart()
+        fragmentLifecycleCallbacks = object : FragmentLifecycleCallbacks() {
+            override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
+                super.onFragmentDetached(fm, f)
+                ApiRepository.instance.getTime(
+                    object : TimeApiRespond {
+                        override fun onApiRespond(respond: TimeModel) {
+                            binding.txtCurrentDatePersian.text = StringJoiner(" ")
+                                .add(respond.date.dayOfMonthDigits)
+                                .add(respond.date.monthFullName)
+                                .add(respond.date.yearFourDigit)
+                                .toString()
+                        }
+
+                        override fun onApiRespondFailure(message: String) {
+                            Log.e("API", message)
+                        }
+
+                    }
+                )
+            }
+        }
+        supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, false)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks)
+    }
+
     private fun checkConnectivityManager(): Boolean {
         val connectivityManager =
             getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         val capabilities =
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         if (capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true) {
-            val apiRepositoryInstance = ApiRepository.instance
-            apiRepositoryInstance.getTime(
+            ApiRepository.instance.getTime(
                 object : TimeApiRespond {
                     override fun onApiRespond(respond: TimeModel) {
                         binding.txtCurrentDatePersian.text = StringJoiner(" ")

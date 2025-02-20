@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +24,7 @@ class GoldPriceFragment : Fragment() {
     private lateinit var binding: FragmentGoldPriceBinding
     private var recyclerListItems = ArrayList<GoldAndCurrencyContent>()
     private lateinit var adapter: GoldRecyclerViewAdapter
+    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +84,35 @@ class GoldPriceFragment : Fragment() {
                 binding.swipeRefresh.isRefreshing = false
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fragmentLifecycleCallbacks = object : FragmentLifecycleCallbacks() {
+            override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
+                super.onFragmentDetached(fm, f)
+                ApiRepository.instance.getPrices(
+                    object : PriceApiRespond {
+                        override fun onApiRespond(respond: PriceModel) {
+                            adapter.makeMutableData(recyclerListItems)
+                            adapter.setNewData(respond.data.golds)
+                            binding.progress.visibility = View.GONE
+                            Log.i("TEST", respond.data.golds.toString())
+                        }
+
+                        override fun onApiRespondFailure(message: String) {
+                            Log.e("API", message)
+                        }
+                    }
+                )
+            }
+        }
+        parentFragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, false)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        parentFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks)
     }
 
 }
