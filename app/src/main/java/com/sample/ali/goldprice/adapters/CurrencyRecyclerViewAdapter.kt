@@ -36,7 +36,7 @@ class CurrencyRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyCo
         }
     }
 
-    fun setData(data: ArrayList<GoldAndCurrencyContent>) {
+    fun makeMutableData(data: ArrayList<GoldAndCurrencyContent>) {
         this.items = data.toMutableList() as ArrayList<GoldAndCurrencyContent>
     }
 

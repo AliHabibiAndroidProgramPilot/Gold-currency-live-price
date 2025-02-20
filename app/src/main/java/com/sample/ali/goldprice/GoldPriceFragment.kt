@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.ali.goldprice.adapters.GoldRecyclerViewAdapter
@@ -14,22 +15,23 @@ import com.sample.ali.goldprice.remote.ApiRepository
 import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
 import com.sample.ali.goldprice.remote.priceapi.PriceApiRespond
 import com.sample.ali.goldprice.remote.priceapi.PriceModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class GoldPriceFragment : Fragment() {
     private lateinit var binding: FragmentGoldPriceBinding
-    private var goldsPrice = ArrayList<GoldAndCurrencyContent>()
+    private var recyclerListItems = ArrayList<GoldAndCurrencyContent>()
+    private lateinit var adapter: GoldRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ApiRepository.instance.getPrices(
             object : PriceApiRespond {
                 override fun onApiRespond(respond: PriceModel) {
-                    goldsPrice.addAll(respond.data.golds)
+                    val startPosition = recyclerListItems.size
                     activity?.runOnUiThread {
-                        val recyclerView = binding.recyclerGoldPrice
-                        recyclerView.layoutManager =
-                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                        recyclerView.adapter = GoldRecyclerViewAdapter(goldsPrice)
+                        recyclerListItems.addAll(respond.data.golds)
+                        adapter.notifyItemRangeInserted(startPosition, respond.data.golds.size)
                         binding.progress.visibility = View.GONE
                     }
                 }
@@ -47,7 +49,38 @@ class GoldPriceFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentGoldPriceBinding.inflate(inflater)
+        adapter = GoldRecyclerViewAdapter(recyclerListItems)
+        val recyclerView = binding.recyclerGoldPrice
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recyclerView.adapter = adapter
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val swipeRefresh = binding.swipeRefresh
+        swipeRefresh.setColorSchemeResources(R.color.gold_text, R.color.splash_gold)
+        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.back_view_black)
+        swipeRefresh.setOnRefreshListener {
+            ApiRepository.instance.getPrices(
+                object : PriceApiRespond {
+                    override fun onApiRespond(respond: PriceModel) {
+                        adapter.makeMutableData(recyclerListItems)
+                        adapter.setNewData(respond.data.golds)
+                        Log.i("TEST", respond.data.golds.toString())
+                    }
+
+                    override fun onApiRespondFailure(message: String) {
+                        Log.e("API", message)
+                    }
+
+                }
+            )
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(850)
+                binding.swipeRefresh.isRefreshing = false
+            }
+        }
     }
 
 }
