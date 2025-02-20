@@ -9,25 +9,36 @@
     android:padding="5dp"
     tools:context=".CurrencyPriceFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_currencyPrice"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/recycler_item_currency" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_currencyPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/recycler_item_currency" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:indeterminateTint="@color/splash_gold"
-        app:layout_constraintBottom_toBottomOf="@+id/recycler_currencyPrice"
-        app:layout_constraintEnd_toEndOf="@+id/recycler_currencyPrice"
-        app:layout_constraintStart_toStartOf="@+id/recycler_currencyPrice"
-        app:layout_constraintTop_toTopOf="@+id/recycler_currencyPrice" />
+        app:layout_constraintBottom_toBottomOf="@id/swipe_refresh"
+        app:layout_constraintEnd_toEndOf="@id/swipe_refresh"
+        app:layout_constraintStart_toStartOf="@id/swipe_refresh"
+        app:layout_constraintTop_toTopOf="@id/swipe_refresh" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

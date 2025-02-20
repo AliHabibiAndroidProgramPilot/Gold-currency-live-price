@@ -3,13 +3,14 @@ package com.sample.ali.goldprice.adapters
 import android.icu.text.DecimalFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.sample.ali.goldprice.R
 import com.sample.ali.goldprice.databinding.RecyclerItemCurrencyBinding
 import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
 
-class CurrencyRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyContent>) :
+class CurrencyRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyContent>) :
     Adapter<CurrencyRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: RecyclerItemCurrencyBinding) :
@@ -33,6 +34,18 @@ class CurrencyRecyclerViewAdapter(private val items: ArrayList<GoldAndCurrencyCo
                 3 -> imageView.setImageResource(icons[3])
             }
         }
+    }
+
+    fun setData(data: ArrayList<GoldAndCurrencyContent>) {
+        this.items = data.toMutableList() as ArrayList<GoldAndCurrencyContent>
+    }
+
+    fun setUpdatedData(newList: ArrayList<GoldAndCurrencyContent>) {
+        val diffUtilCallback = DiffUtilCallback(items, newList)
+        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
+        items.clear()
+        items.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
