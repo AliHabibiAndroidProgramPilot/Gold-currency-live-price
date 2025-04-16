@@ -5,12 +5,12 @@ import android.content.Context
 interface InternetUnavailableFragmentContract {
 
     interface View {
-
+        fun btnContinueToAppClick(isConnectivityAvailable: Boolean) {}
     }
 
     interface Presenter {
         fun attachView(view: View)
-        fun viewCaller() {}
+        fun viewCaller(context: Context) {}
         fun detachView()
     }
 
