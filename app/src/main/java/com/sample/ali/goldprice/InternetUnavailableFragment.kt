@@ -40,6 +40,7 @@ class InternetUnavailableFragment : Fragment(), InternetUnavailableFragmentContr
         binding.btnTryAgain.setOnClickListener {
             if (presenter.connectivityChecker(requireContext())) {
                 parentFragmentManager.beginTransaction()
+                    .setCustomAnimations(0, R.animator.fade_out)
                     .remove(this)
                     .commit()
             }
