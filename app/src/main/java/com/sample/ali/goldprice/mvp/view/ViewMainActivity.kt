@@ -2,9 +2,13 @@ package com.sample.ali.goldprice.mvp.view
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentManager
+import com.sample.ali.goldprice.InternetUnavailableFragment
+import com.sample.ali.goldprice.R
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
 import com.sample.ali.goldprice.mvp.ext.ActivityUtils
 
@@ -28,6 +32,14 @@ class ViewMainActivity(
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         insetsController.isAppearanceLightStatusBars = false
         insetsController.isAppearanceLightNavigationBars = false
+    }
+
+    fun setInternetUnavailableFragment() {
+        binding.fragmentContainer.visibility = View.VISIBLE
+        val supportFragmentManager: FragmentManager = utils.getActivitySupportFragmentManager()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, InternetUnavailableFragment())
+            .commit()
     }
 
 }

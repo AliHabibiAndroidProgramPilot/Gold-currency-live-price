@@ -14,8 +14,16 @@ class PresenterMainActivity(
     override fun presenterOnCreate() {
         view.setInsets()
         view.setSystemBarsColor()
+        connectivityManager()
     }
 
     override fun presenterOnDestroy() {}
+
+    private fun connectivityManager() {
+        val connectivityState: Boolean = model.checkDeviceConnectivity(utils.getContext()!!)
+        if (!connectivityState) {
+            view.setInternetUnavailableFragment()
+        }
+    }
 
 }
