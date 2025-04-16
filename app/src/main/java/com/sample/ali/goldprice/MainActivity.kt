@@ -18,6 +18,9 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
+import com.sample.ali.goldprice.mvp.model.ModelMainActivity
+import com.sample.ali.goldprice.mvp.presenter.PresenterMainActivity
+import com.sample.ali.goldprice.mvp.view.ViewMainActivity
 import com.sample.ali.goldprice.remote.ApiRepository
 import com.sample.ali.goldprice.remote.timeapi.TimeApiRespond
 import com.sample.ali.goldprice.remote.timeapi.TimeModel
@@ -27,14 +30,24 @@ import java.util.StringJoiner
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private val tabLayoutItems = arrayListOf("قیمت طلا", "قیمت ارز")
+
+    private lateinit var presenter: PresenterMainActivity
+
+    /*private val tabLayoutItems = arrayListOf("قیمت طلا", "قیمت ارز")
     private var hasNetworkCapabilities = false
     private var isNotShowingSplashScreen = false
-    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
+    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen().setKeepOnScreenCondition { !isNotShowingSplashScreen }
+        val splashScreen = installSplashScreen()
+        enableEdgeToEdge()
+        val view = ViewMainActivity(this)
+        val model = ModelMainActivity()
+        presenter = PresenterMainActivity(view, model)
+//        splashScreen.setKeepOnScreenCondition { presenter.shouldKeepSplashOnScreen() }
+        presenter.presenterOnCreate()
+        /*installSplashScreen().setKeepOnScreenCondition { !isNotShowingSplashScreen }
         enableEdgeToEdge()
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         insetsController.isAppearanceLightNavigationBars = false
@@ -62,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
         TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
             tab.text = tabLayoutItems[position]
-        }.attach()
+        }.attach()*/
     }
 
     override fun onStart() {
