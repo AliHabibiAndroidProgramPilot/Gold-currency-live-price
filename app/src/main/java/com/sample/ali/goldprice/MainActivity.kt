@@ -1,10 +1,12 @@
 package com.sample.ali.goldprice
 
+import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -18,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
+import com.sample.ali.goldprice.mvp.ext.ActivityUtils
 import com.sample.ali.goldprice.mvp.model.ModelMainActivity
 import com.sample.ali.goldprice.mvp.presenter.PresenterMainActivity
 import com.sample.ali.goldprice.mvp.view.ViewMainActivity
@@ -29,7 +32,7 @@ import kotlinx.coroutines.launch
 import java.util.StringJoiner
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ActivityUtils {
 
     private lateinit var presenter: PresenterMainActivity
 
@@ -40,22 +43,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val splashScreen = installSplashScreen()
+        installSplashScreen()
         enableEdgeToEdge()
-        val view = ViewMainActivity(this)
         val model = ModelMainActivity()
-        presenter = PresenterMainActivity(view, model)
-//        splashScreen.setKeepOnScreenCondition { presenter.shouldKeepSplashOnScreen() }
+        val view = ViewMainActivity(this)
+        setContentView(view.binding.root)
+        presenter = PresenterMainActivity(view, model, this)
         presenter.presenterOnCreate()
-        /*installSplashScreen().setKeepOnScreenCondition { !isNotShowingSplashScreen }
-        enableEdgeToEdge()
-        val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+        /*val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         insetsController.isAppearanceLightNavigationBars = false
-        insetsController.isAppearanceLightStatusBars = false
-        hasNetworkCapabilities = checkConnectivityManager()
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        if (hasNetworkCapabilities)
+        insetsController.isAppearanceLightStatusBars = false*/
+
+
+        /*if (hasNetworkCapabilities)
             isNotShowingSplashScreen = true
         else {
             lifecycleScope.launch {
@@ -67,11 +67,8 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container, InternetUnavailableFragment())
                 .commit()
         }
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+
         binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
         TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
             tab.text = tabLayoutItems[position]
@@ -109,30 +106,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks)
     }
 
-    private fun checkConnectivityManager(): Boolean {
-        val connectivityManager =
-            getSystemService(ConnectivityManager::class.java) as ConnectivityManager
-        val capabilities =
-            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if (capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true) {
-            ApiRepository.instance.getTime(
-                object : TimeApiRespond {
-                    override fun onApiRespond(respond: TimeModel) {
-                        binding.txtCurrentDatePersian.text = StringJoiner(" ")
-                            .add(respond.date.dayOfMonthDigits)
-                            .add(respond.date.monthFullName)
-                            .add(respond.date.yearFourDigit)
-                            .toString()
-                    }
+    override fun getContext(): Context = this
 
-                    override fun onApiRespondFailure(message: String) {
-                        Log.e("API", message)
-                    }
-
-                }
-            )
-            return true
-        } else
-            return false
-    }
 }
