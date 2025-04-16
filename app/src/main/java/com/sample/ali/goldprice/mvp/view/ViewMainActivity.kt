@@ -3,6 +3,7 @@ package com.sample.ali.goldprice.mvp.view
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
 import com.sample.ali.goldprice.mvp.ext.ActivityUtils
@@ -20,6 +21,13 @@ class ViewMainActivity(
             view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    fun setSystemBarsColor() {
+        val window = utils.getSystemWindow()!!
+        val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+        insetsController.isAppearanceLightStatusBars = false
+        insetsController.isAppearanceLightNavigationBars = false
     }
 
 }

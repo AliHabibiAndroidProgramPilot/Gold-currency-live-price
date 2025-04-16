@@ -108,4 +108,6 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
 
     override fun getContext(): Context = this
 
+    override fun getSystemWindow(): Window = window
+
 }
