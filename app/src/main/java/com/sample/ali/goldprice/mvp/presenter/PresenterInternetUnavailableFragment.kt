@@ -15,8 +15,12 @@ class PresenterInternetUnavailableFragment(
     }
 
     override fun viewCaller(context: Context) {
-        view?.btnContinueToAppClick(model.checkDeviceConnectivity(context))
+        view?.btnContinueToAppClick()
         view?.txtInternetSettingClick()
+    }
+
+    override fun connectivityChecker(context: Context): Boolean {
+        return model.checkDeviceConnectivity(context)
     }
 
     override fun detachView() {

@@ -36,17 +36,13 @@ class InternetUnavailableFragment : Fragment(), InternetUnavailableFragmentContr
         presenter.viewCaller(requireContext())
     }
 
-    override fun btnContinueToAppClick(isConnectivityAvailable: Boolean) {
+    override fun btnContinueToAppClick() {
         binding.btnTryAgain.setOnClickListener {
-            if (isConnectivityAvailable) {
-                // Check if this Fragment is showing and added to fragment container
-                if (isAdded) {
-                    parentFragmentManager.beginTransaction()
-                        .remove(this)
-                        .commit()
-                }
-            } else
-                return@setOnClickListener
+            if (presenter.connectivityChecker(requireContext())) {
+                parentFragmentManager.beginTransaction()
+                    .remove(this)
+                    .commit()
+            }
         }
     }
 

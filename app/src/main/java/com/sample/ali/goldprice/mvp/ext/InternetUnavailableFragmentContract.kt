@@ -5,13 +5,14 @@ import android.content.Context
 interface InternetUnavailableFragmentContract {
 
     interface View {
-        fun btnContinueToAppClick(isConnectivityAvailable: Boolean) {}
+        fun btnContinueToAppClick() {}
         fun txtInternetSettingClick() {}
     }
 
     interface Presenter {
         fun attachView(view: View)
         fun viewCaller(context: Context) {}
+        fun connectivityChecker(context: Context): Boolean { return false }
         fun detachView()
     }
 
