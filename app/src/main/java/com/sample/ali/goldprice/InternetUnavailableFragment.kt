@@ -1,6 +1,9 @@
 package com.sample.ali.goldprice
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +46,21 @@ class InternetUnavailableFragment : Fragment(), InternetUnavailableFragmentContr
                         .commit()
                 }
             } else
+                return@setOnClickListener
+        }
+    }
+
+    override fun txtInternetSettingClick() {
+        binding.txtInternetSetting.setOnClickListener {
+            val intent: Intent =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                    Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
+                else
+                    Intent(Settings.ACTION_WIRELESS_SETTINGS)
+            val packageManager = requireContext().packageManager
+            if (activity?.intent?.resolveActivity(packageManager) != null)
+                startActivity(intent)
+            else
                 return@setOnClickListener
         }
     }

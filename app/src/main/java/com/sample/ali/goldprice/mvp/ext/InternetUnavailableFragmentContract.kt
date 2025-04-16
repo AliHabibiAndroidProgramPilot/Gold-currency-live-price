@@ -6,6 +6,7 @@ interface InternetUnavailableFragmentContract {
 
     interface View {
         fun btnContinueToAppClick(isConnectivityAvailable: Boolean) {}
+        fun txtInternetSettingClick() {}
     }
 
     interface Presenter {
