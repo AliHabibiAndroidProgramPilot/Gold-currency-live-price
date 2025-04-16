@@ -1,5 +1,7 @@
 package com.sample.ali.goldprice.mvp.ext
 
+import android.content.Context
+
 interface InternetUnavailableFragmentContract {
 
     interface View {
@@ -13,7 +15,7 @@ interface InternetUnavailableFragmentContract {
     }
 
     interface Model {
-
+        fun checkDeviceConnectivity(context: Context): Boolean
     }
 
 }
