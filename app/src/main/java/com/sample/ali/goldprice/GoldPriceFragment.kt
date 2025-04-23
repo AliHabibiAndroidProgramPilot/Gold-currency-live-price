@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sample.ali.goldprice.adapters.GoldRecyclerViewAdapter
 import com.sample.ali.goldprice.databinding.FragmentGoldPriceBinding
 import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
 import com.sample.ali.goldprice.mvp.model.ModelGoldPriceFragment
 import com.sample.ali.goldprice.mvp.presenter.PresenterGoldPriceFragment
+import com.sample.ali.goldprice.remote.model.ApiModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -22,29 +25,10 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
     private var _binding: FragmentGoldPriceBinding? = null
     private val binding get() = _binding!!
     private lateinit var presenter: PresenterGoldPriceFragment
+    private lateinit var adapter: GoldRecyclerViewAdapter
 //    private var recyclerListItems = ArrayList<GoldAndCurrencyContent>()
 //    private lateinit var adapter: GoldRecyclerViewAdapter
 //    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /*ApiRepository.instance.getPrices(
-            object : PriceApiRespond {
-                override fun onApiRespond(respond: PriceModel) {
-                    val startPosition = recyclerListItems.size
-                    activity?.runOnUiThread {
-                        recyclerListItems.addAll(respond.data.golds)
-                        adapter.notifyItemRangeInserted(startPosition, respond.data.golds.size)
-                        binding.progress.visibility = View.GONE
-                    }
-                }
-
-                override fun onApiRespondFailure(message: String) {
-                    Log.i("API", message)
-                }
-            }
-        )*/
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,9 +45,11 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val model = ModelGoldPriceFragment()
+        val apiKey = "Freedh1PXvgCtNrcn374FDBUVintkvGa"
         presenter = PresenterGoldPriceFragment(model)
         presenter.attachView(this)
         presenter.viewCaller(requireContext())
+        presenter.fetchGoldPrices(apiKey)
         /*val swipeRefresh = binding.swipeRefresh
         swipeRefresh.setColorSchemeResources(R.color.gold_text, R.color.splash_gold)
         swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.back_view_black)*/
@@ -117,6 +103,17 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
         super.onDestroy()
         parentFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks)
     }*/
+
+    override fun setupRecyclerView(data: ApiModel) {
+        adapter = GoldRecyclerViewAdapter(data.gold)
+        binding.recyclerGoldPrice.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.recyclerGoldPrice.adapter = adapter
+    }
+
+    override fun errorFetchingGoldPrice(errorMessage: String) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
