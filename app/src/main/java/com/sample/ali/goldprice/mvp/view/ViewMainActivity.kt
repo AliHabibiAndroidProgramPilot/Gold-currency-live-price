@@ -50,13 +50,8 @@ class ViewMainActivity(
         binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
         TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
             when (position) {
-                0 -> {
-                    tab.text = "طلا"
-                }
-
-                1 -> {
-                    tab.text = "ارز"
-                }
+                0 -> tab.text = "طلا"
+                1 -> tab.text = "ارز"
             }
         }.attach()
     }

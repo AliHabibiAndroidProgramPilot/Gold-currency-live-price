@@ -2,7 +2,7 @@ package com.sample.ali.goldprice.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Gold(
+data class GoldAndCurrencyModel(
     val date: String,
     val time: String,
     val name: String,

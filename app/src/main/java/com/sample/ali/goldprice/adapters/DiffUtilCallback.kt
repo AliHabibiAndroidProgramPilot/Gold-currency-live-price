@@ -1,13 +1,13 @@
-/*
 package com.sample.ali.goldprice.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
+import com.sample.ali.goldprice.remote.model.GoldAndCurrencyModel
 
 class DiffUtilCallback(
-    private val oldList: ArrayList<GoldAndCurrencyContent>,
-    private val newList: ArrayList<GoldAndCurrencyContent>
+    private val oldList: ArrayList<GoldAndCurrencyModel>,
+    private val newList: ArrayList<GoldAndCurrencyModel>
 ): DiffUtil.Callback() {
+
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size
@@ -24,4 +24,4 @@ class DiffUtilCallback(
         return oldItem.hashCode() == newItem.hashCode()
     }
 
-}*/
+}
