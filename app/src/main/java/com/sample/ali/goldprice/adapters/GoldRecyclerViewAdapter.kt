@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.sample.ali.goldprice.R
 import com.sample.ali.goldprice.databinding.RecyclerItemGoldBinding
-import com.sample.ali.goldprice.remote.model.ApiModel
-import com.sample.ali.goldprice.remote.model.GoldAndCurrencyModel
+import com.sample.ali.goldprice.remote.price.model.GoldAndCurrencyModel
 
 class GoldRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyModel>) :
     Adapter<GoldRecyclerViewAdapter.ViewHolder>() {

@@ -1,12 +1,12 @@
 package com.sample.ali.goldprice.mvp.ext
 
 import android.content.Context
-import com.sample.ali.goldprice.remote.model.ApiModel
+import com.sample.ali.goldprice.remote.price.model.PriceApiModel
 
 interface GoldPriceFragmentContract {
 
     interface View {
-        fun setupRecyclerView(data: ApiModel) {}
+        fun setupRecyclerView(data: PriceApiModel) {}
         fun errorFetchingGoldPrice(errorMessage: String) {}
     }
 
@@ -18,7 +18,7 @@ interface GoldPriceFragmentContract {
     }
 
     interface Model {
-        suspend fun getGoldPrices(apiKey: String): Result<ApiModel>
+        suspend fun getGoldPrices(apiKey: String): Result<PriceApiModel>
     }
 
 }

@@ -1,7 +1,7 @@
 package com.sample.ali.goldprice.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.sample.ali.goldprice.remote.model.GoldAndCurrencyModel
+import com.sample.ali.goldprice.remote.price.model.GoldAndCurrencyModel
 
 class DiffUtilCallback(
     private val oldList: ArrayList<GoldAndCurrencyModel>,

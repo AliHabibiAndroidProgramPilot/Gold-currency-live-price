@@ -13,7 +13,7 @@ import com.sample.ali.goldprice.databinding.FragmentGoldPriceBinding
 import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
 import com.sample.ali.goldprice.mvp.model.ModelGoldPriceFragment
 import com.sample.ali.goldprice.mvp.presenter.PresenterGoldPriceFragment
-import com.sample.ali.goldprice.remote.model.ApiModel
+import com.sample.ali.goldprice.remote.price.model.PriceApiModel
 
 class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
 
@@ -92,7 +92,7 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
         parentFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks)
     }*/
 
-    override fun setupRecyclerView(data: ApiModel) {
+    override fun setupRecyclerView(data: PriceApiModel) {
         adapter = GoldRecyclerViewAdapter(data.gold)
         binding.recyclerGoldPrice.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)

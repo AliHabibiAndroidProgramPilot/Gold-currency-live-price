@@ -1,6 +1,6 @@
-package com.sample.ali.goldprice.remote.model
+package com.sample.ali.goldprice.remote.price.model
 
-data class ApiModel(
+data class PriceApiModel(
     val currency: ArrayList<GoldAndCurrencyModel>,
     val gold: ArrayList<GoldAndCurrencyModel>
 )
