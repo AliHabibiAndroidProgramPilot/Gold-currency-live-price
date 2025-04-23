@@ -7,8 +7,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.InternetUnavailableFragment
 import com.sample.ali.goldprice.R
+import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
 import com.sample.ali.goldprice.mvp.ext.ActivityUtils
 
@@ -40,6 +42,16 @@ class ViewMainActivity(
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, InternetUnavailableFragment())
             .commit()
+    }
+
+    fun setMainTabLayout() {
+        val tabLayoutItems = arrayListOf("طلا", "ارز")
+        val supportFragmentManager = utils.getActivitySupportFragmentManager()
+        val lifecycle = utils.getActivityLifecycle()
+        binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
+            tab.text = tabLayoutItems[position]
+        }.attach()
     }
 
 }

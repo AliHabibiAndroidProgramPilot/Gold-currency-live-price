@@ -14,6 +14,7 @@ class PresenterMainActivity(
     override fun presenterOnCreate() {
         view.setInsets()
         view.setSystemBarsColor()
+        view.setMainTabLayout()
         connectivityManager()
     }
 

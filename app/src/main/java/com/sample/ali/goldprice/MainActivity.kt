@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import com.sample.ali.goldprice.mvp.ext.ActivityUtils
 import com.sample.ali.goldprice.mvp.model.ModelMainActivity
 import com.sample.ali.goldprice.mvp.presenter.PresenterMainActivity
@@ -31,12 +32,6 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
         setContentView(view.binding.root)
         presenter = PresenterMainActivity(view, model, this)
         presenter.presenterOnCreate()
-
-        /*
-        binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
-        TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
-            tab.text = tabLayoutItems[position]
-        }.attach()*/
     }
 
     /*override fun onStart() {
@@ -80,5 +75,7 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
     override fun getActivitySupportFragmentManager(): FragmentManager = supportFragmentManager
 
     override fun getSystemWindow(): Window = window
+
+    override fun getActivityLifecycle(): Lifecycle = lifecycle
 
 }
