@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.ali.goldprice.adapters.CurrencyRecyclerViewAdapter
 import com.sample.ali.goldprice.databinding.FragmentCurrencyPriceBinding
-import com.sample.ali.goldprice.remote.ApiRepository
 import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
 import com.sample.ali.goldprice.remote.priceapi.PriceApiRespond
 import com.sample.ali.goldprice.remote.priceapi.PriceModel
