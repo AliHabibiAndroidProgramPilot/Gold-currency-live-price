@@ -38,7 +38,8 @@ class InternetUnavailableFragment : Fragment(), InternetUnavailableFragmentContr
 
     override fun btnContinueToAppClick() {
         binding.btnTryAgain.setOnClickListener {
-            if (presenter.connectivityChecker(requireContext())) {
+            val connectivityState: Boolean = presenter.connectivityChecker(requireContext())
+            if (connectivityState) {
                 parentFragmentManager.beginTransaction()
                     .setCustomAnimations(0, R.animator.fade_out)
                     .remove(this)
