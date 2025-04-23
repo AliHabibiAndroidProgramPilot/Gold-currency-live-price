@@ -1,6 +1,6 @@
 [versions]
 agp = "8.5.2"
-kotlin = "1.9.0"
+kotlin = "2.0.21"
 #noinspection GradleDependency
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -10,8 +10,8 @@ appcompat = "1.7.0"
 material = "1.12.0"
 #noinspection GradleDependency
 activity = "1.8.1"
-constraintlayout = "2.2.0"
-retrofit = "2.9.0"
+constraintlayout = "2.2.1"
+retrofit = "2.11.0"
 swiperefreshlayout = "1.1.0"
 
 [libraries]
