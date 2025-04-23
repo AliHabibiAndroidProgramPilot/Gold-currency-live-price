@@ -18,10 +18,7 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
 
     private lateinit var presenter: PresenterMainActivity
 
-    /*private val tabLayoutItems = arrayListOf("قیمت طلا", "قیمت ارز")
-    private var hasNetworkCapabilities = false
-    private var isNotShowingSplashScreen = false
-    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks*/
+//    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

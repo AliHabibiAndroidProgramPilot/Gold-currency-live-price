@@ -1,3 +1,4 @@
+/*
 package com.sample.ali.goldprice.adapters
 
 import android.icu.text.DecimalFormat
@@ -60,4 +61,4 @@ class GoldRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyConten
         holder.setRecyclerData(items[position], position)
     }
 
-}
+}*/

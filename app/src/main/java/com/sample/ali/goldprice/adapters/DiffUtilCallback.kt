@@ -1,3 +1,4 @@
+/*
 package com.sample.ali.goldprice.adapters
 
 import androidx.recyclerview.widget.DiffUtil
@@ -23,4 +24,4 @@ class DiffUtilCallback(
         return oldItem.hashCode() == newItem.hashCode()
     }
 
-}
+}*/

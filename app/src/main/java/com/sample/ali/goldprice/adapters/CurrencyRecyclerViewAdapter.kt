@@ -1,3 +1,4 @@
+/*
 package com.sample.ali.goldprice.adapters
 
 import android.icu.text.DecimalFormat
@@ -8,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.sample.ali.goldprice.R
 import com.sample.ali.goldprice.databinding.RecyclerItemCurrencyBinding
-import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
 
 class CurrencyRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyContent>) :
     Adapter<CurrencyRecyclerViewAdapter.ViewHolder>() {
@@ -59,4 +59,4 @@ class CurrencyRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyCo
         holder.setRecyclerData(items[position], position)
     }
 
-}
+}*/

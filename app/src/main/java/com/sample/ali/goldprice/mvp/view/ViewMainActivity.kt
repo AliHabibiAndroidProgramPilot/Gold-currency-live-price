@@ -45,12 +45,19 @@ class ViewMainActivity(
     }
 
     fun setMainTabLayout() {
-        val tabLayoutItems = arrayListOf("طلا", "ارز")
         val supportFragmentManager = utils.getActivitySupportFragmentManager()
         val lifecycle = utils.getActivityLifecycle()
         binding.tabLayoutViewPager.adapter = TabLayoutAdapter(supportFragmentManager, lifecycle)
         TabLayoutMediator(binding.tabLayout, binding.tabLayoutViewPager) { tab, position ->
-            tab.text = tabLayoutItems[position]
+            when (position) {
+                0 -> {
+                    tab.text = "طلا"
+                }
+
+                1 -> {
+                    tab.text = "ارز"
+                }
+            }
         }.attach()
     }
 

@@ -9,22 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.ali.goldprice.adapters.CurrencyRecyclerViewAdapter
 import com.sample.ali.goldprice.databinding.FragmentCurrencyPriceBinding
-import com.sample.ali.goldprice.remote.priceapi.GoldAndCurrencyContent
-import com.sample.ali.goldprice.remote.priceapi.PriceApiRespond
-import com.sample.ali.goldprice.remote.priceapi.PriceModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class CurrencyPriceFragment : Fragment() {
     private lateinit var binding: FragmentCurrencyPriceBinding
-    private val recyclerListItems = ArrayList<GoldAndCurrencyContent>()
-    private lateinit var adapter: CurrencyRecyclerViewAdapter
+//    private val recyclerListItems = ArrayList<GoldAndCurrencyContent>()
+//    private lateinit var adapter: CurrencyRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ApiRepository.instance.getPrices(
+        /*ApiRepository.instance.getPrices(
             object : PriceApiRespond {
                 override fun onApiRespond(respond: PriceModel) {
                     val startPosition = recyclerListItems.size
@@ -39,7 +35,8 @@ class CurrencyPriceFragment : Fragment() {
                     Log.e("API", "no respond from api")
                 }
             }
-        )
+        )*/
+
     }
 
     override fun onCreateView(
@@ -48,10 +45,10 @@ class CurrencyPriceFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentCurrencyPriceBinding.inflate(inflater)
-        adapter = CurrencyRecyclerViewAdapter(recyclerListItems)
+//        adapter = CurrencyRecyclerViewAdapter(recyclerListItems)
         val recyclerView = binding.recyclerCurrencyPrice
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = adapter
+//        recyclerView.adapter = adapter
         return binding.root
     }
 
@@ -61,7 +58,7 @@ class CurrencyPriceFragment : Fragment() {
         swipeRefresh.setColorSchemeResources(R.color.gold_text, R.color.splash_gold)
         swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.back_view_black)
         swipeRefresh.setOnRefreshListener {
-            ApiRepository.instance.getPrices(
+            /*ApiRepository.instance.getPrices(
                 object : PriceApiRespond {
                     override fun onApiRespond(respond: PriceModel) {
                         adapter.makeMutableData(recyclerListItems)
@@ -73,7 +70,8 @@ class CurrencyPriceFragment : Fragment() {
                         Log.e("API", message)
                     }
                 }
-            )
+            )*/
+
             viewLifecycleOwner.lifecycleScope.launch {
                 delay(850)
                 binding.swipeRefresh.isRefreshing = false
