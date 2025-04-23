@@ -1,14 +1,11 @@
 package com.sample.ali.goldprice
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.ali.goldprice.adapters.GoldRecyclerViewAdapter
@@ -17,8 +14,6 @@ import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
 import com.sample.ali.goldprice.mvp.model.ModelGoldPriceFragment
 import com.sample.ali.goldprice.mvp.presenter.PresenterGoldPriceFragment
 import com.sample.ali.goldprice.remote.model.ApiModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
 
@@ -26,8 +21,6 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
     private val binding get() = _binding!!
     private lateinit var presenter: PresenterGoldPriceFragment
     private lateinit var adapter: GoldRecyclerViewAdapter
-//    private var recyclerListItems = ArrayList<GoldAndCurrencyContent>()
-//    private lateinit var adapter: GoldRecyclerViewAdapter
 //    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
 
     override fun onCreateView(
@@ -36,20 +29,15 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
     ): View {
         _binding = FragmentGoldPriceBinding.inflate(layoutInflater, container, false)
         return binding.root
-//        adapter = GoldRecyclerViewAdapter(recyclerListItems)
-        /*val recyclerView = binding.recyclerGoldPrice
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)*/
-//        recyclerView.adapter = adapter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val model = ModelGoldPriceFragment()
-        val apiKey = "Freedh1PXvgCtNrcn374FDBUVintkvGa"
         presenter = PresenterGoldPriceFragment(model)
         presenter.attachView(this)
         presenter.viewCaller(requireContext())
-        presenter.fetchGoldPrices(apiKey)
+        presenter.fetchGoldPrices("Freedh1PXvgCtNrcn374FDBUVintkvGa")
         /*val swipeRefresh = binding.swipeRefresh
         swipeRefresh.setColorSchemeResources(R.color.gold_text, R.color.splash_gold)
         swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.back_view_black)*/
@@ -112,7 +100,7 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
     }
 
     override fun errorFetchingGoldPrice(errorMessage: String) {
-        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        Log.w("Api", errorMessage)
     }
 
     override fun onDestroyView() {
