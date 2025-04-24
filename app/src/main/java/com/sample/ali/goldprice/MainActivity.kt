@@ -1,5 +1,6 @@
 package com.sample.ali.goldprice
 
+import android.content.ContentResolver
 import android.content.Context
 import android.os.Bundle
 import android.view.Window
@@ -74,5 +75,7 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
     override fun getSystemWindow(): Window = window
 
     override fun getActivityLifecycle(): Lifecycle = lifecycle
+
+    override fun getActivityContentResolver(): ContentResolver = contentResolver
 
 }

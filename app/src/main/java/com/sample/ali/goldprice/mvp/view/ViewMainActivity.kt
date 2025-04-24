@@ -56,4 +56,8 @@ class ViewMainActivity(
         }.attach()
     }
 
+    fun visibleDateAndTimeHelperIcon() {
+        binding.icDateAndTimeInfo.visibility = View.VISIBLE
+    }
+
 }

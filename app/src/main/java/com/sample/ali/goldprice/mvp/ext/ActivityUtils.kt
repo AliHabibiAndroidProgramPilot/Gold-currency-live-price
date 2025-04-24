@@ -1,5 +1,6 @@
 package com.sample.ali.goldprice.mvp.ext
 
+import android.content.ContentResolver
 import android.content.Context
 import android.view.Window
 import androidx.fragment.app.FragmentManager
@@ -10,4 +11,5 @@ interface ActivityUtils {
     fun getSystemWindow(): Window? { return null }
     fun getActivitySupportFragmentManager(): FragmentManager
     fun getActivityLifecycle(): Lifecycle
+    fun getActivityContentResolver(): ContentResolver
 }

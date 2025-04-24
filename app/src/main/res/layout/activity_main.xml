@@ -45,14 +45,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:fontFamily="@font/sans_fa_name_bold"
+        android:format24Hour="HH : mm"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="22sp"
-        android:format24Hour="HH : mm"
         app:layout_constraintBottom_toBottomOf="@+id/top_card"
         app:layout_constraintEnd_toEndOf="@+id/top_card"
         app:layout_constraintStart_toStartOf="@+id/top_card"
         app:layout_constraintTop_toTopOf="@+id/top_card" />
+
+    <ImageButton
+        android:id="@+id/ic_date_and_time_info"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/help_icon"
+        android:src="@drawable/ic_help"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/top_card"
+        app:layout_constraintEnd_toStartOf="@+id/txt_clock"
+        app:layout_constraintStart_toStartOf="@+id/top_card" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -92,10 +106,10 @@
         android:layout_height="match_parent"
         android:layoutDirection="rtl"
         android:visibility="gone"
-        tools:layout="@layout/support_simple_spinner_dropdown_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/support_simple_spinner_dropdown_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

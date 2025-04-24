@@ -16,6 +16,7 @@ class PresenterMainActivity(
         view.setSystemBarsColor()
         view.setMainTabLayout()
         connectivityManager()
+        dateAndTimeHelperManager()
     }
 
     override fun presenterOnDestroy() {}
@@ -25,6 +26,13 @@ class PresenterMainActivity(
         if (!connectivityState) {
             view.setInternetUnavailableFragment()
         }
+    }
+
+    private fun dateAndTimeHelperManager() {
+        val contentResolver = utils.getActivityContentResolver()
+        val timeAndTimeZoneProviderState = model.isNetworkProvidingTimeZone(contentResolver)
+        if (!timeAndTimeZoneProviderState)
+            view.visibleDateAndTimeHelperIcon()
     }
 
 }
