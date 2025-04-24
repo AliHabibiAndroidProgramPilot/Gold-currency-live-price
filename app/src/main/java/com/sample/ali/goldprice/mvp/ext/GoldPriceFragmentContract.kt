@@ -1,7 +1,7 @@
 package com.sample.ali.goldprice.mvp.ext
 
 import android.content.Context
-import com.sample.ali.goldprice.remote.price.model.PriceApiModel
+import com.sample.ali.goldprice.remote.model.PriceApiModel
 
 interface GoldPriceFragmentContract {
 

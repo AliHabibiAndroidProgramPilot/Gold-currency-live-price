@@ -1,8 +1,8 @@
 package com.sample.ali.goldprice.mvp.model
 
 import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
-import com.sample.ali.goldprice.remote.price.PriceApiRetrofitService
-import com.sample.ali.goldprice.remote.price.model.PriceApiModel
+import com.sample.ali.goldprice.remote.PriceApiRetrofitService
+import com.sample.ali.goldprice.remote.model.PriceApiModel
 
 class ModelGoldPriceFragment : GoldPriceFragmentContract.Model {
 

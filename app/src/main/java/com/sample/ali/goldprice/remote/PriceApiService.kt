@@ -1,6 +1,6 @@
-package com.sample.ali.goldprice.remote.price
+package com.sample.ali.goldprice.remote
 
-import com.sample.ali.goldprice.remote.price.model.PriceApiModel
+import com.sample.ali.goldprice.remote.model.PriceApiModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

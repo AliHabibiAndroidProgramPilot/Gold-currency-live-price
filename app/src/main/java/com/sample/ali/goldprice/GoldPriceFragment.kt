@@ -13,7 +13,7 @@ import com.sample.ali.goldprice.databinding.FragmentGoldPriceBinding
 import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
 import com.sample.ali.goldprice.mvp.model.ModelGoldPriceFragment
 import com.sample.ali.goldprice.mvp.presenter.PresenterGoldPriceFragment
-import com.sample.ali.goldprice.remote.price.model.PriceApiModel
+import com.sample.ali.goldprice.remote.model.PriceApiModel
 
 class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
 

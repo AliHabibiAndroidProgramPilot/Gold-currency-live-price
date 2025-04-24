@@ -1,4 +1,4 @@
-package com.sample.ali.goldprice.remote.price.model
+package com.sample.ali.goldprice.remote.model
 
 import com.google.gson.annotations.SerializedName
 

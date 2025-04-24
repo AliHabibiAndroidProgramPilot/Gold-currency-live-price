@@ -1,4 +1,4 @@
-package com.sample.ali.goldprice.remote.price
+package com.sample.ali.goldprice.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
