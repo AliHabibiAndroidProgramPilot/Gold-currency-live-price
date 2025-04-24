@@ -60,4 +60,8 @@ class ViewMainActivity(
         binding.icDateAndTimeInfo.visibility = View.VISIBLE
     }
 
+    fun setDateText(dateText: String) {
+        binding.txtCurrentDatePersian.text = dateText
+    }
+
 }

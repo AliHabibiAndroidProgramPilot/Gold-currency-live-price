@@ -4,6 +4,9 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
+import java.util.Calendar
 
 class ModelMainActivity {
 
@@ -33,6 +36,11 @@ class ModelMainActivity {
         } catch (e: Exception) {
             return false
         }
+    }
+
+    fun convertToPersianDate(): String {
+        val persianDate = PersianDate(Calendar.getInstance().timeInMillis)
+        return PersianDateFormat("l j F Y").format(persianDate)
     }
 
 }

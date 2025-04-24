@@ -14,6 +14,7 @@ class PresenterMainActivity(
     override fun presenterOnCreate() {
         view.setInsets()
         view.setSystemBarsColor()
+        setPersianDate()
         view.setMainTabLayout()
         connectivityManager()
         dateAndTimeHelperManager()
@@ -33,6 +34,11 @@ class PresenterMainActivity(
         val timeAndTimeZoneProviderState = model.isNetworkProvidingTimeZone(contentResolver)
         if (!timeAndTimeZoneProviderState)
             view.visibleDateAndTimeHelperIcon()
+    }
+
+    private fun setPersianDate() {
+        val dateText = model.convertToPersianDate()
+        view.setDateText(dateText)
     }
 
 }
