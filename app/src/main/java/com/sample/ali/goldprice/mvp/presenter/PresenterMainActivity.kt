@@ -18,6 +18,7 @@ class PresenterMainActivity(
         view.setMainTabLayout()
         connectivityManager()
         dateAndTimeHelperManager()
+        view.wrongDateAndTimeBottomSheet(utils.getContext()!!)
     }
 
     override fun presenterOnDestroy() {}

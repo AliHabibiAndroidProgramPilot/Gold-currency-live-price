@@ -7,11 +7,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sample.ali.goldprice.InternetUnavailableFragment
 import com.sample.ali.goldprice.R
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
+import com.sample.ali.goldprice.databinding.WrongDateAndTimeLayoutBinding
 import com.sample.ali.goldprice.mvp.ext.ActivityUtils
 
 class ViewMainActivity(
@@ -62,6 +64,18 @@ class ViewMainActivity(
 
     fun setDateText(dateText: String) {
         binding.txtCurrentDatePersian.text = dateText
+    }
+
+    fun wrongDateAndTimeBottomSheet(context: Context) {
+        if (binding.icDateAndTimeInfo.visibility == View.VISIBLE) {
+            binding.icDateAndTimeInfo.setOnClickListener {
+                val bottomSheet = BottomSheetDialog(context)
+                val contentView =
+                    WrongDateAndTimeLayoutBinding.inflate(LayoutInflater.from(context))
+                bottomSheet.setContentView(contentView.root)
+                bottomSheet.show()
+            }
+        }
     }
 
 }

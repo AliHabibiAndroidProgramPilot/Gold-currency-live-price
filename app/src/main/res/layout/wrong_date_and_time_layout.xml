@@ -5,7 +5,7 @@
     android:background="@color/back_view_black"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:padding="5dp"
+    android:padding="12dp"
     android:textDirection="rtl">
 
     <TextView
@@ -30,6 +30,8 @@
         android:text="@string/wrong_date_explanation"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:maxLines="2"
+        android:layout_marginBottom="12dp"
+        android:textSize="14sp" />
 
 </LinearLayout>
