@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,6 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
     private val binding get() = _binding!!
     private lateinit var presenter: PresenterGoldPriceFragment
     private lateinit var adapter: GoldRecyclerViewAdapter
-//    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,65 +38,20 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
         presenter.attachView(this)
         presenter.viewCaller(requireContext())
         presenter.fetchGoldPrices("Freedh1PXvgCtNrcn374FDBUVintkvGa")
-        /*val swipeRefresh = binding.swipeRefresh
-        swipeRefresh.setColorSchemeResources(R.color.gold_text, R.color.splash_gold)
-        swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.back_view_black)*/
-        /*swipeRefresh.setOnRefreshListener {
-            *//*ApiRepository.instance.getPrices(
-                object : PriceApiRespond {
-                    override fun onApiRespond(respond: PriceModel) {
-                        adapter.makeMutableData(recyclerListItems)
-                        adapter.setNewData(respond.data.golds)
-                        Log.i("TEST", respond.data.golds.toString())
-                    }
-
-                    override fun onApiRespondFailure(message: String) {
-                        Log.e("API", message)
-                    }
-
-                }
-            )*//*
-            viewLifecycleOwner.lifecycleScope.launch {
-                delay(850)
-                binding.swipeRefresh.isRefreshing = false
-            }
-        }*/
     }
-
-    /*override fun onStart() {
-        super.onStart()
-        fragmentLifecycleCallbacks = object : FragmentLifecycleCallbacks() {
-            override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
-                super.onFragmentDetached(fm, f)
-                *//*ApiRepository.instance.getPrices(
-                    object : PriceApiRespond {
-                        override fun onApiRespond(respond: PriceModel) {
-                            adapter.makeMutableData(recyclerListItems)
-                            adapter.setNewData(respond.data.golds)
-                            binding.progress.visibility = View.GONE
-                            Log.i("TEST", respond.data.golds.toString())
-                        }
-
-                        override fun onApiRespondFailure(message: String) {
-                            Log.e("API", message)
-                        }
-                    }
-                )*//*
-            }
-        }
-        parentFragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, false)
-    }*/
-
-    /*override fun onDestroy() {
-        super.onDestroy()
-        parentFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks)
-    }*/
 
     override fun setupRecyclerView(data: PriceApiModel) {
         adapter = GoldRecyclerViewAdapter(data.gold)
         binding.recyclerGoldPrice.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.recyclerGoldPrice.adapter = adapter
+    }
+
+    override fun setupSwipeRefresh() {
+        binding.swipeRefresh.apply {
+            setColorSchemeResources(R.color.gold_text, R.color.splash_gold)
+            setProgressBackgroundColorSchemeResource(R.color.back_view_black)
+        }
     }
 
     override fun errorFetchingGoldPrice(errorMessage: String) {

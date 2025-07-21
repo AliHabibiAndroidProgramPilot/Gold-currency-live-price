@@ -9,7 +9,7 @@ class ModelGoldPriceFragment : GoldPriceFragmentContract.Model {
     override suspend fun getGoldPrices(apiKey: String): Result<PriceApiModel> {
         return try {
             val apiService = PriceApiRetrofitService.priceApiService
-            val response = apiService.getTimeAndPrices(apiKey)
+            val response = apiService.getPrices(apiKey)
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!)
             } else {

@@ -17,6 +17,10 @@ class PresenterGoldPriceFragment(
         this.view = view
     }
 
+    override fun viewCaller(context: Context) {
+        view?.setupSwipeRefresh()
+    }
+
     override fun fetchGoldPrices(apiKey: String) {
         CoroutineScope(Dispatchers.Main).launch {
             //TODO(View show Loading should be here)

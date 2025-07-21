@@ -3,7 +3,6 @@ package com.sample.ali.goldprice.adapters
 import android.icu.text.DecimalFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.sample.ali.goldprice.R
@@ -43,18 +42,6 @@ class GoldRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyModel>
                 8 -> binding.contentIcon.setImageResource(icons[position])
             }
         }
-    }
-
-    fun makeMutableData(data: ArrayList<GoldAndCurrencyModel>) {
-        this.items = data.toMutableList() as ArrayList<GoldAndCurrencyModel>
-    }
-
-    fun setNewData(newList: ArrayList<GoldAndCurrencyModel>) {
-        val diffUtilCallback = DiffUtilCallback(items, newList)
-        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-        items.clear()
-        items.addAll(newList)
-        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
