@@ -7,7 +7,13 @@ import retrofit2.http.Query
 
 interface PriceApiService {
 
+    /**
+     * This is Main Function For Api
+     * Receiving Both Gold And Currency Data At One Body
+     * @author Ali Habibi
+     * @param apiKey api key
+     */
     @GET("Gold_Currency.php?")
-    suspend fun getTimeAndPrices(@Query("key") apiKey: String) : Response<PriceApiModel>
+    suspend fun getPrices(@Query("key") apiKey: String) : Response<PriceApiModel>
 
 }
