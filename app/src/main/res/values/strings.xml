@@ -18,4 +18,5 @@
     <string name="help_icon">help icon</string>
     <string name="wrong_date">تاریخ و ساعت اشتباهه؟</string>
     <string name="wrong_date_explanation">این ممکنه بخاطر اشتباه تنظیم شدن تاریخ و ساعت موبایل باشه از قسمت تنظیمات میتونی برطرفش کنی</string>
+    <string name="failed_resolve_data_message">در دریافت اطلاعات ناموفق بودیم</string>
 </resources>

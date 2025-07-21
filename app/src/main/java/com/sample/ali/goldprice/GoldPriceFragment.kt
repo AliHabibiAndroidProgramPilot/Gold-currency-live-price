@@ -1,11 +1,9 @@
 package com.sample.ali.goldprice
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,10 +35,11 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
         presenter = PresenterGoldPriceFragment(model)
         presenter.attachView(this)
         presenter.viewCaller(requireContext())
-        presenter.fetchGoldPrices("Freedh1PXvgCtNrcn374FDBUVintkvGa")
+        presenter.fetchGoldPrices()
     }
 
     override fun setupRecyclerView(data: PriceApiModel) {
+        binding.includedMessageBox.root.visibility = View.GONE
         adapter = GoldRecyclerViewAdapter(data.gold)
         binding.recyclerGoldPrice.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -54,8 +53,9 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
         }
     }
 
-    override fun errorFetchingGoldPrice(errorMessage: String) {
-        Log.w("Api", errorMessage)
+    override fun showErrorFetchingGoldPriceMessage(errorCode: Int) {
+        binding.includedMessageBox.txtErrorCode.text = errorCode.toString()
+        binding.includedMessageBox.root.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

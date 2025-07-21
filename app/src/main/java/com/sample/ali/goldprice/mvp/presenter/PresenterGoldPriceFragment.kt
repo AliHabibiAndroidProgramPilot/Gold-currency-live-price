@@ -1,8 +1,10 @@
 package com.sample.ali.goldprice.mvp.presenter
 
 import android.content.Context
+import android.util.Log
 import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
 import com.sample.ali.goldprice.mvp.model.ModelGoldPriceFragment
+import com.sample.ali.goldprice.remote.ApiResultHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,18 +23,21 @@ class PresenterGoldPriceFragment(
         view?.setupSwipeRefresh()
     }
 
-    override fun fetchGoldPrices(apiKey: String) {
+    override fun fetchGoldPrices() {
         CoroutineScope(Dispatchers.Main).launch {
             //TODO(View show Loading should be here)
-            val result = model.getGoldPrices(apiKey)
+            when (val result = model.getGoldPrices()) {
+                is ApiResultHandler.OnSuccess -> {
+                    view?.setupRecyclerView(result.body)
+                }
+
+                is ApiResultHandler.OnFailure -> {
+                    view?.showErrorFetchingGoldPriceMessage(result.code ?: 0)
+                    val errorMessageAndCode = "${result.code} \n ${result.errorMessage}"
+                    Log.e("API", errorMessageAndCode)
+                }
+            }
             //TODO(View hide Loading should be here)
-            result
-                .onSuccess { data ->
-                    view?.setupRecyclerView(data)
-                }
-                .onFailure { errorMessage ->
-                    view?.errorFetchingGoldPrice(errorMessage.message ?: "Unknown error")
-                }
         }
     }
 
