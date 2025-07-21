@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.ali.goldprice.adapters.GoldRecyclerViewAdapter
@@ -17,9 +18,22 @@ import com.sample.ali.goldprice.remote.model.PriceApiModel
 class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
 
     private var _binding: FragmentGoldPriceBinding? = null
+
     private val binding get() = _binding!!
+
     private lateinit var presenter: PresenterGoldPriceFragment
+
     private lateinit var adapter: GoldRecyclerViewAdapter
+
+    private val fragmentCallback = object : FragmentManager.FragmentLifecycleCallbacks() {
+        override fun onFragmentDetached(fm: FragmentManager, fragment: Fragment) {
+            if (fragment is InternetUnavailableFragment) {
+                presenter.fetchGoldPrices()
+                binding.includedMessageBox.root.visibility = View.GONE
+            }
+            super.onFragmentDetached(fm, fragment)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,10 +72,15 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
         binding.includedMessageBox.root.visibility = View.VISIBLE
     }
 
+    override fun fetchPricesOnFragmentRemoval() {
+        parentFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallback, true)
+    }
+
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
         presenter.detachView()
+        parentFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentCallback)
+        super.onDestroyView()
     }
 
 }

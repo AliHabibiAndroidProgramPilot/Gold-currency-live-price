@@ -2,6 +2,10 @@ package com.sample.ali.goldprice.mvp.presenter
 
 import android.content.Context
 import android.util.Log
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.sample.ali.goldprice.InternetUnavailableFragment
 import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
 import com.sample.ali.goldprice.mvp.model.ModelGoldPriceFragment
 import com.sample.ali.goldprice.remote.ApiResultHandler
@@ -21,6 +25,7 @@ class PresenterGoldPriceFragment(
 
     override fun viewCaller(context: Context) {
         view?.setupSwipeRefresh()
+        view?.fetchPricesOnFragmentRemoval()
     }
 
     override fun fetchGoldPrices() {

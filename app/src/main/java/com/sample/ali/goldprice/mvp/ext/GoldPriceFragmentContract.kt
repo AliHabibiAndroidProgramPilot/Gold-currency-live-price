@@ -9,6 +9,7 @@ interface GoldPriceFragmentContract {
     interface View {
         fun setupRecyclerView(data: PriceApiModel) {}
         fun setupSwipeRefresh()
+        fun fetchPricesOnFragmentRemoval()
         fun showErrorFetchingGoldPriceMessage(errorCode: Int) {}
     }
 
