@@ -2,10 +2,6 @@ package com.sample.ali.goldprice.mvp.presenter
 
 import android.content.Context
 import android.util.Log
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.sample.ali.goldprice.InternetUnavailableFragment
 import com.sample.ali.goldprice.mvp.ext.GoldPriceFragmentContract
 import com.sample.ali.goldprice.mvp.model.ModelGoldPriceFragment
 import com.sample.ali.goldprice.remote.ApiResultHandler
@@ -29,20 +25,21 @@ class PresenterGoldPriceFragment(
     }
 
     override fun fetchGoldPrices() {
+        view?.manageLoadingAnimation(true)
         CoroutineScope(Dispatchers.Main).launch {
-            //TODO(View show Loading should be here)
             when (val result = model.getGoldPrices()) {
                 is ApiResultHandler.OnSuccess -> {
+                    view?.manageLoadingAnimation(false)
                     view?.setupRecyclerView(result.body)
                 }
 
                 is ApiResultHandler.OnFailure -> {
+                    view?.manageLoadingAnimation(false)
                     view?.showErrorFetchingGoldPriceMessage(result.code ?: 0)
                     val errorMessageAndCode = "${result.code} \n ${result.errorMessage}"
                     Log.e("API", errorMessageAndCode)
                 }
             }
-            //TODO(View hide Loading should be here)
         }
     }
 

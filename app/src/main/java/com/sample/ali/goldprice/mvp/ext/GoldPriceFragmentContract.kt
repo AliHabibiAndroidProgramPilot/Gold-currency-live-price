@@ -11,6 +11,7 @@ interface GoldPriceFragmentContract {
         fun setupSwipeRefresh()
         fun fetchPricesOnFragmentRemoval()
         fun showErrorFetchingGoldPriceMessage(errorCode: Int) {}
+        fun manageLoadingAnimation(isShowing: Boolean)
     }
 
     interface Presenter {

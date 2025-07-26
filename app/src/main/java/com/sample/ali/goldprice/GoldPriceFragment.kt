@@ -67,6 +67,13 @@ class GoldPriceFragment : Fragment(), GoldPriceFragmentContract.View {
         }
     }
 
+    override fun manageLoadingAnimation(isShowing: Boolean) {
+        if (isShowing)
+            binding.animLoading.visibility = View.VISIBLE
+        else
+            binding.animLoading.visibility = View.GONE
+    }
+
     override fun showErrorFetchingGoldPriceMessage(errorCode: Int) {
         binding.includedMessageBox.txtErrorCode.text = errorCode.toString()
         binding.includedMessageBox.root.visibility = View.VISIBLE
