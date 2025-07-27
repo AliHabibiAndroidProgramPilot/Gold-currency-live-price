@@ -106,8 +106,10 @@ class ViewMainActivity(
     }
 
     fun enableErrorBox(errorCode: Short) {
-        binding.includedErrorBox.txtErrorCode.text = errorCode.toString()
-        binding.includedErrorBox.root.visibility = View.VISIBLE
+        if (utils.getRegisteredFragmentManager().fragments.isEmpty()) {
+            binding.includedErrorBox.txtErrorCode.text = errorCode.toString()
+            binding.includedErrorBox.root.visibility = View.VISIBLE
+        }
     }
 
     fun wrongDateAndTimeBottomSheet(context: Context) {
@@ -132,23 +134,25 @@ class ViewMainActivity(
     fun showVpnProblemMessage() {
         val message = "استفاده از vpn ممکن است موجب اختلال برنامه شود"
         val typeFace = ResourcesCompat.getFont(utils.getContext()!!, R.font.sans_fa_name_regular)
-        Snackbar.make(utils.getContext()!!, binding.root, message, Snackbar.LENGTH_INDEFINITE).apply {
-            setTextColor(utils.getAppResources().getColor(R.color.gold_text, null))
-            setBackgroundTint(utils.getAppResources().getColor(R.color.back_view_black, null))
-            view.layoutDirection = View.LAYOUT_DIRECTION_RTL
-            view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {
-                typeface = typeFace
+        Snackbar.make(utils.getContext()!!, binding.root, message, Snackbar.LENGTH_INDEFINITE)
+            .apply {
+                setTextColor(utils.getAppResources().getColor(R.color.gold_text, null))
+                setBackgroundTint(utils.getAppResources().getColor(R.color.back_view_black, null))
+                view.layoutDirection = View.LAYOUT_DIRECTION_RTL
+                view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {
+                    typeface = typeFace
+                }
+                setActionTextColor(utils.getAppResources().getColor(R.color.gold_text, null))
+                view.findViewById<TextView>(com.google.android.material.R.id.snackbar_action)
+                    .apply {
+                        textSize = 14f
+                        typeface = typeFace
+                    }
+                setAction("فهمیدم") {
+                    dismiss()
+                }
+                show()
             }
-            setActionTextColor(utils.getAppResources().getColor(R.color.gold_text, null))
-            view.findViewById<TextView>(com.google.android.material.R.id.snackbar_action).apply {
-                textSize = 14f
-                typeface = typeFace
-            }
-            setAction("فهمیدم") {
-                dismiss()
-            }
-            show()
-        }
     }
 
     fun registerFragmentCallback() {
