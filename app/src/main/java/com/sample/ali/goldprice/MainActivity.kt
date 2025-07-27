@@ -2,6 +2,7 @@ package com.sample.ali.goldprice
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.enableEdgeToEdge
@@ -23,12 +24,17 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         enableEdgeToEdge()
-        val model = ModelMainActivity()
+        val model = ModelMainActivity(this)
         val view = ViewMainActivity(this, this)
         setContentView(view.binding.root)
         presenter = PresenterMainActivity(view, model, this)
         view.presenterContract = presenter
         presenter.presenterOnCreate()
+    }
+
+    override fun onStart() {
+        presenter.presenterOnStart()
+        super.onStart()
     }
 
     override fun onDestroy() {
@@ -47,5 +53,7 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
     override fun getActivityContentResolver(): ContentResolver = contentResolver
 
     override fun getRegisteredFragmentManager(): FragmentManager = supportFragmentManager
+
+    override fun getAppResources(): Resources = resources
 
 }

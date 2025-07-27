@@ -13,11 +13,13 @@ import java.util.Calendar
 
 private const val apiKey: String = "Freedh1PXvgCtNrcn374FDBUVintkvGa"
 
-class ModelMainActivity {
+class ModelMainActivity(context: Context) {
 
-    fun checkDeviceConnectivity(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+    private val connectivityManager by lazy {
+        context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+    }
+
+    fun checkDeviceConnectivity(): Boolean {
         val networkCapabilities =
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true && networkCapabilities.hasCapability(
@@ -64,6 +66,12 @@ class ModelMainActivity {
     fun convertToPersianDate(): String {
         val persianDate = PersianDate(Calendar.getInstance().timeInMillis)
         return PersianDateFormat("l j F Y").format(persianDate)
+    }
+
+    fun checkForVpnService(): Boolean {
+        val activeNetwork = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
+        return capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_VPN) ?: return false
     }
 
 }

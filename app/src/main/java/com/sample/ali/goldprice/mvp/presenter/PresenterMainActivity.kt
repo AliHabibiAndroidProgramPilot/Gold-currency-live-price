@@ -33,10 +33,15 @@ class PresenterMainActivity(
     }
 
     private fun connectivityManager() {
-        val connectivityState: Boolean = model.checkDeviceConnectivity(utils.getContext()!!)
+        val connectivityState: Boolean = model.checkDeviceConnectivity()
         if (!connectivityState) {
             view.setInternetUnavailableFragment()
         }
+    }
+
+    private fun checkVpnState() {
+        if (model.checkForVpnService())
+            view.showVpnProblemMessage()
     }
 
     private fun dateAndTimeHelperManager() {
@@ -68,6 +73,10 @@ class PresenterMainActivity(
                 }
             }
         }
+    }
+
+    override fun presenterOnStart() {
+        checkVpnState()
     }
 
 }
