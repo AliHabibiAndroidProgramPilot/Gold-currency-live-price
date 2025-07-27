@@ -60,9 +60,9 @@ class PresenterMainActivity(
                 }
 
                 is ApiResultHandler.OnFailure -> {
-//                    view?.showErrorFetchingGoldPriceMessage(result.code ?: 0)
                     view.setMainTabLayout(PriceApiModel(arrayListOf(), arrayListOf()))
                     view.manageLoadingAnimation(false)
+                    view.enableErrorBox(result.code?.toShort() ?: 400)
                     val errorMessageAndCode = "${result.code} \n ${result.errorMessage}"
                     Log.e("API", errorMessageAndCode)
                 }

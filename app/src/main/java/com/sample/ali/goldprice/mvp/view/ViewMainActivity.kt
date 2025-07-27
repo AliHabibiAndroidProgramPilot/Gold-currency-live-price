@@ -102,6 +102,11 @@ class ViewMainActivity(
         binding.txtCurrentDatePersian.text = dateText
     }
 
+    fun enableErrorBox(errorCode: Short) {
+        binding.includedErrorBox.txtErrorCode.text = errorCode.toString()
+        binding.includedErrorBox.root.visibility = View.VISIBLE
+    }
+
     fun wrongDateAndTimeBottomSheet(context: Context) {
         if (binding.icDateAndTimeInfo.visibility == View.VISIBLE) {
             binding.icDateAndTimeInfo.setOnClickListener {
