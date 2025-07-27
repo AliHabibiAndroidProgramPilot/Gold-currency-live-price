@@ -12,7 +12,6 @@ class PresenterCurrencyPriceFragment : CurrencyPriceFragmentContract.Presenter {
 
     override fun viewCaller() {
         view?.setupRecyclerView()
-        view?.setupSwipeRefresh()
     }
 
     override fun detachView() {
