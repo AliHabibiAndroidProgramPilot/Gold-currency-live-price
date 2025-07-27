@@ -11,6 +11,8 @@ import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import java.util.Calendar
 
+private const val apiKey: String = "Freedh1PXvgCtNrcn374FDBUVintkvGa"
+
 class ModelMainActivity {
 
     fun checkDeviceConnectivity(context: Context): Boolean {
@@ -44,7 +46,7 @@ class ModelMainActivity {
     suspend fun getPrices(): ApiResultHandler<PriceApiModel> {
         return try {
             val apiService = PriceApiRetrofitService.priceApiService
-            val response = apiService.getPrices("Freedh1PXvgCtNrcn374FDBUVintkvGa")
+            val response = apiService.getPrices(apiKey)
             if (response.isSuccessful && response.body() != null) {
                 ApiResultHandler.OnSuccess(response.body()!!, response.code())
             } else {
