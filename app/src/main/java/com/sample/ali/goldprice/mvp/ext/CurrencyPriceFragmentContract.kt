@@ -1,8 +1,6 @@
 package com.sample.ali.goldprice.mvp.ext
 
-import android.content.Context
-
-interface GoldPriceFragmentContract {
+interface CurrencyPriceFragmentContract {
 
     interface View {
         fun setupRecyclerView() {}
@@ -11,7 +9,7 @@ interface GoldPriceFragmentContract {
 
     interface Presenter {
         fun attachView(view: View)
-        fun viewCaller(context: Context) {}
+        fun viewCaller() {}
         fun detachView()
     }
 

@@ -9,15 +9,17 @@ import com.sample.ali.goldprice.GoldPriceFragment
 
 class TabLayoutAdapter(
     supportFragmentManager: FragmentManager,
-    lifecycle: Lifecycle
+    lifecycle: Lifecycle,
+    private val goldPriceFragment: GoldPriceFragment,
+    private val currencyPriceFragment: CurrencyPriceFragment
 ) : FragmentStateAdapter(supportFragmentManager, lifecycle) {
 
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment = when (position) {
-        0 -> GoldPriceFragment()
-        1 -> CurrencyPriceFragment()
-        else -> GoldPriceFragment()
+        0 -> goldPriceFragment
+        1 -> currencyPriceFragment
+        else -> goldPriceFragment
     }
 
 }

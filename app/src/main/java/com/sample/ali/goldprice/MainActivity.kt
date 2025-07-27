@@ -19,8 +19,6 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
 
     private lateinit var presenter: PresenterMainActivity
 
-//    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -29,39 +27,9 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
         val view = ViewMainActivity(this, this)
         setContentView(view.binding.root)
         presenter = PresenterMainActivity(view, model, this)
+        view.presenterContract = presenter
         presenter.presenterOnCreate()
     }
-
-    /*override fun onStart() {
-        super.onStart()
-        fragmentLifecycleCallbacks = object : FragmentLifecycleCallbacks() {
-            override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
-                super.onFragmentDetached(fm, f)
-                ApiRepository.instance.getTime(
-                    object : TimeApiRespond {
-                        override fun onApiRespond(respond: TimeModel) {
-                            binding.txtCurrentDatePersian.text = StringJoiner(" ")
-                                .add(respond.date.dayOfMonthDigits)
-                                .add(respond.date.monthFullName)
-                                .add(respond.date.yearFourDigit)
-                                .toString()
-                        }
-
-                        override fun onApiRespondFailure(message: String) {
-                            Log.e("API", message)
-                        }
-
-                    }
-                )
-            }
-        }
-        supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, false)
-    }*/
-
-    /*override fun onDestroy() {
-        super.onDestroy()
-        supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks)
-    }*/
 
     override fun onDestroy() {
         super.onDestroy()
@@ -77,5 +45,7 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
     override fun getActivityLifecycle(): Lifecycle = lifecycle
 
     override fun getActivityContentResolver(): ContentResolver = contentResolver
+
+    override fun getRegisteredFragmentManager(): FragmentManager = supportFragmentManager
 
 }

@@ -12,4 +12,5 @@ interface ActivityUtils {
     fun getActivitySupportFragmentManager(): FragmentManager
     fun getActivityLifecycle(): Lifecycle
     fun getActivityContentResolver(): ContentResolver
+    fun getRegisteredFragmentManager(): FragmentManager
 }
