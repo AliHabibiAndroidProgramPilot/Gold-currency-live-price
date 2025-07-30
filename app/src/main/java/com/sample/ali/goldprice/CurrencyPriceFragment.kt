@@ -52,13 +52,6 @@ class CurrencyPriceFragment : Fragment(), CurrencyPriceFragmentContract.View {
         binding.recyclerCurrencyPrice.adapter = adapter
     }
 
-    override fun setupSwipeRefresh() {
-        binding.swipeRefresh.apply {
-            setColorSchemeResources(R.color.gold_text, R.color.splash_gold)
-            setProgressBackgroundColorSchemeResource(R.color.back_view_black)
-        }
-    }
-
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()

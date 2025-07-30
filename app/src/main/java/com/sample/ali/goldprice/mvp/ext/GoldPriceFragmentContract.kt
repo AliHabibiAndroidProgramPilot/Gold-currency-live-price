@@ -6,7 +6,6 @@ interface GoldPriceFragmentContract {
 
     interface View {
         fun setupRecyclerView() {}
-        fun setupSwipeRefresh()
     }
 
     interface Presenter {

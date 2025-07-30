@@ -4,7 +4,6 @@ interface CurrencyPriceFragmentContract {
 
     interface View {
         fun setupRecyclerView() {}
-        fun setupSwipeRefresh()
     }
 
     interface Presenter {
