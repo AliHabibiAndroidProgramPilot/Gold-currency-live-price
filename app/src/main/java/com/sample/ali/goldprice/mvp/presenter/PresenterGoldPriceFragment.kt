@@ -12,7 +12,7 @@ class PresenterGoldPriceFragment : GoldPriceFragmentContract.Presenter {
     }
 
     override fun viewCaller(context: Context) {
-        view?.setupSwipeRefresh()
+        view?.setupRecyclerView()
     }
 
 
