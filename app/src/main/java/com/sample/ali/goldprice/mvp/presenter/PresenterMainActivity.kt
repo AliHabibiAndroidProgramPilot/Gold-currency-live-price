@@ -7,9 +7,9 @@ import com.sample.ali.goldprice.mvp.model.ModelMainActivity
 import com.sample.ali.goldprice.mvp.view.ViewMainActivity
 import com.sample.ali.goldprice.remote.ApiResultHandler
 import com.sample.ali.goldprice.remote.model.PriceApiModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PresenterMainActivity(
     private val view: ViewMainActivity,
@@ -57,16 +57,17 @@ class PresenterMainActivity(
     }
 
     fun fetchPrices() {
-        CoroutineScope(Dispatchers.Main).launch {
-            when (val result = model.getPrices()) {
-                is ApiResultHandler.OnSuccess -> {
-                    view.setMainTabLayout(result.body)
-                    view.manageLoadingAnimation(false)
-                }
+        view.manageLoadingAnimation(true)
+        utils.getActivityLifecycleScope().launch {
+            val result = withContext(Dispatchers.IO) {
+                model.getPrices()
+            }
+            view.manageLoadingAnimation(false)
+            when (result) {
+                is ApiResultHandler.OnSuccess -> view.setMainTabLayout(result.body)
 
                 is ApiResultHandler.OnFailure -> {
                     view.setMainTabLayout(PriceApiModel(arrayListOf(), arrayListOf()))
-                    view.manageLoadingAnimation(false)
                     view.enableErrorBox(result.code?.toShort() ?: 400)
                     val errorMessageAndCode = "${result.code} \n ${result.errorMessage}"
                     Log.e("API", errorMessageAndCode)

@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
 import com.sample.ali.goldprice.mvp.ext.ActivityUtils
 import com.sample.ali.goldprice.mvp.model.ModelMainActivity
 import com.sample.ali.goldprice.mvp.presenter.PresenterMainActivity
@@ -49,6 +51,8 @@ class MainActivity : AppCompatActivity(), ActivityUtils {
     override fun getSystemWindow(): Window = window
 
     override fun getActivityLifecycle(): Lifecycle = lifecycle
+
+    override fun getActivityLifecycleScope(): LifecycleCoroutineScope = lifecycleScope
 
     override fun getActivityContentResolver(): ContentResolver = contentResolver
 
