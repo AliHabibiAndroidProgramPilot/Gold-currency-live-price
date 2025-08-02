@@ -30,4 +30,10 @@
         <item name="tabIndicatorHeight">0dp</item>
     </style>
 
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#474747</item>
+    </style>
+
 </resources>
