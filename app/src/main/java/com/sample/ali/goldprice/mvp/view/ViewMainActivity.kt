@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -20,6 +21,7 @@ import com.sample.ali.goldprice.InternetUnavailableFragment
 import com.sample.ali.goldprice.R
 import com.sample.ali.goldprice.adapters.TabLayoutAdapter
 import com.sample.ali.goldprice.databinding.ActivityMainBinding
+import com.sample.ali.goldprice.databinding.PrivacyCustomDialogBinding
 import com.sample.ali.goldprice.databinding.WrongDateAndTimeLayoutBinding
 import com.sample.ali.goldprice.mvp.ext.ActivityUtils
 import com.sample.ali.goldprice.mvp.presenter.PresenterMainActivity
@@ -162,6 +164,29 @@ class ViewMainActivity(
 
     fun unregisterFragmentCallback() {
         utils.getRegisteredFragmentManager().unregisterFragmentLifecycleCallbacks(fragmentCallback)
+    }
+
+    fun showPrivacyAlertDialog(onConfirmed: () -> Unit) {
+        val dialogBinding =
+            PrivacyCustomDialogBinding.inflate(LayoutInflater.from(utils.getContext()!!))
+        val dialog = AlertDialog.Builder(utils.getContext()!!).apply {
+            setView(dialogBinding.root)
+            setCancelable(false)
+        }.create()
+        dialogBinding.checkbox.setOnCheckedChangeListener { compoundButton, _ ->
+            if (compoundButton.isChecked) {
+                dialogBinding.btnOkay.isEnabled = true
+                dialogBinding.btnOkay.alpha = 1f
+            } else {
+                dialogBinding.btnOkay.isEnabled = false
+                dialogBinding.btnOkay.alpha = 0.5f
+            }
+        }
+        dialogBinding.btnOkay.setOnClickListener {
+            dialog.dismiss()
+            onConfirmed()
+        }
+        dialog.show()
     }
 
 }

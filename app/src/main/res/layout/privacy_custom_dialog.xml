@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
+    android:layout_height="wrap_content"
+    android:background="@color/back_view_black"
     android:layoutDirection="ltr">
 
     <TextView
         android:id="@+id/txt_title"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/sans_fa_name_bold"
         android:text="@string/privacy_title"
         android:textAlignment="textStart"
@@ -24,16 +25,16 @@
     <View
         android:id="@+id/divider"
         style="@style/Divider"
-        android:layout_margin="25dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_title" />
 
     <ScrollView
         android:id="@+id/scroll"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:layout_marginHorizontal="5dp"
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toTopOf="@id/checkbox"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,10 +47,10 @@
             android:layout_gravity="end"
             android:fontFamily="@font/sans_fa_name_regular"
             android:justificationMode="inter_word"
+            android:text="@string/privacy_message"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:targetApi="o"
-            android:text="@string/privacy_message" />
+            android:textSize="16sp"
+            tools:targetApi="o" />
 
     </ScrollView>
 
@@ -58,29 +59,32 @@
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:buttonTint="@color/checkbox_color"
         android:fontFamily="@font/sans_fa_name_regular"
         android:text="@string/acceptation"
         android:textColor="@color/gold_text"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/scroll"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scroll" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_okay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.5"
         android:backgroundTint="@color/back_view_black"
+        android:enabled="false"
         android:fontFamily="@font/sans_fa_name_regular"
         android:text="@string/enter_app"
+        android:textColor="@color/gold_text"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:enabled="false"
-        app:layout_constraintBottom_toBottomOf="@+id/checkbox"
-        app:layout_constraintEnd_toStartOf="@+id/checkbox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/checkbox" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox"
+        app:rippleColor="@color/splash_gold_low_opacity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

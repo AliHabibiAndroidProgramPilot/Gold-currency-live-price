@@ -15,6 +15,8 @@ private const val apiKey: String = "Freedh1PXvgCtNrcn374FDBUVintkvGa"
 
 class ModelMainActivity(context: Context) {
 
+    private val prefs = context.getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
+
     private val connectivityManager by lazy {
         context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
     }
@@ -72,6 +74,23 @@ class ModelMainActivity(context: Context) {
         val activeNetwork = connectivityManager.activeNetwork ?: return false
         val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
         return capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_VPN) ?: return false
+    }
+
+    val changePreferences: (Boolean) -> Unit = { isAccepted ->
+        prefs.edit()
+            .putBoolean("PREFERENCES", isAccepted)
+            .apply()
+    }
+
+    val preferencesState: () -> Boolean = {
+        prefs.getBoolean("PREFERENCES", false)
+    }
+
+    init {
+        if (!prefs.contains("PREFERENCES"))
+            prefs.edit()
+                .putBoolean("PREFERENCES", false)
+                .apply()
     }
 
 }

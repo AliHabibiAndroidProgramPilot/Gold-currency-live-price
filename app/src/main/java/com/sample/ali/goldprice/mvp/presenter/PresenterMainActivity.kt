@@ -20,6 +20,10 @@ class PresenterMainActivity(
     override fun presenterOnCreate() {
         view.setInsets()
         view.setSystemBarsColor()
+        if (!model.preferencesState())
+            view.showPrivacyAlertDialog {
+                model.changePreferences(true)
+            }
         setPersianDate()
         connectivityManager()
         view.registerFragmentCallback()
