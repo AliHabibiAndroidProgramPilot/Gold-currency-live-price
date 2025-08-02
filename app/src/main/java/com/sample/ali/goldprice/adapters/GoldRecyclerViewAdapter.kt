@@ -30,16 +30,8 @@ class GoldRecyclerViewAdapter(private var items: ArrayList<GoldAndCurrencyModel>
         fun setRecyclerData(data: GoldAndCurrencyModel, position: Int) {
             binding.contentTitle.text = data.name
             binding.contentPrice.text = DecimalFormat("#,###").format(data.price)
-            when (position) {
-                0 -> binding.contentIcon.setImageResource(icons[position])
-                1 -> binding.contentIcon.setImageResource(icons[position])
-                2 -> binding.contentIcon.setImageResource(icons[position])
-                3 -> binding.contentIcon.setImageResource(icons[position])
-                4 -> binding.contentIcon.setImageResource(icons[position])
-                5 -> binding.contentIcon.setImageResource(icons[position])
-                6 -> binding.contentIcon.setImageResource(icons[position])
-                7 -> binding.contentIcon.setImageResource(icons[position])
-                8 -> binding.contentIcon.setImageResource(icons[position])
+            if (position in icons.indices) {
+                binding.contentIcon.setImageResource(icons[position])
             }
         }
     }
