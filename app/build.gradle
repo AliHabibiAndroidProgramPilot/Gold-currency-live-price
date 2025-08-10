@@ -5,16 +5,16 @@ plugins {
 }
 
 android {
-    namespace 'com.sample.ali.goldprice'
+    namespace 'info.alihabibi.goldcurrencyprice'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.sample.ali.goldprice"
+        applicationId "info.alihabibi.goldcurrencyprice"
         minSdk 24
         //noinspection OldTargetApi
         targetSdk 34
-        versionCode 6
-        versionName '4.2'
+        versionCode 7
+        versionName '4.3.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
